@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ blog_type.type_name }}{% endblock %}
+
+
+
+{% block content %}
+ <div class="container">
+        <div class="row">
+            <div class="col-mod-8">
+                {% for blog in blogs %}
+                    <a href="{% url 'blog_detail' blog.pk %}"><h3>{{ blog.title }}</h3></a>
+                    <p>作者:{{ blog.author }}</p>
+                    <p>发布日期：{{ blog.created_time | date:"Y-m-d H:n:s" }}</p>
+                    <p>分类：<a href="{% url 'blogs_with_type' blog.blog_type.pk %}">{{ blog.blog_type }}</a></p>
+                    <p>{{ blog.content | truncatechars:20 }}</p>
+                {% empty %}
+                    <p>-- 暂无内容 --</p>
+                {% endfor %}
+                共有{{ blogs | length }}篇文章
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

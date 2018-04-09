@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block nav_blog_active %}active{% endblock %}
+
+{% block content %}
+
+    <div class="col-sm-8 col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ blog.title }}</div>
+            <div class="panel-body">
+                <ul class="blog-detail-ul">
+                    <li>作者:{{ blog.author }}</li>
+                    <li>发布日期：{{ blog.created_time | date:"Y-m-d H:n:s" }}</li>
+                    <li>分类：<a href="{% url 'blogs_with_type' blog.blog_type.pk %}">{{ blog.blog_type }}</a></li>
+                </ul>
+
+                <div class="blog-detail-content">{{ blog.content }}</div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body{
+    margin-top: 70px!important;
+}
+h3.home-content {
+    font-size: 234%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+ul.blog-detail-ul li{
+    display: inline-block;
+    margin-right: 1em;
+    list-style-type: none;
+}
+
+div.blog-detail-content{
+    margin-top: 2em;
+}

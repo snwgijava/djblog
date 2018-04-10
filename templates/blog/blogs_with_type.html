@@ -1,25 +1,27 @@
-{% extends 'base.html' %}
+{% extends 'blog/blog_list.html' %}
 {% block title %}{{ blog_type.type_name }}{% endblock %}
 
 
 
 {% block content %}
- <div class="container">
-        <div class="row">
-            <div class="col-mod-8">
-                {% for blog in blogs %}
+ <div class="col-sm-8 col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ blog_type.type_name }}列表（共有{{ blogs.paginator.count }}篇文章）</div>
+            <div class="panel-body">
+                {% for blog in blogs.object_list %}
                     <a href="{% url 'blog_detail' blog.pk %}"><h3>{{ blog.title }}</h3></a>
                     <p>作者:{{ blog.author }}</p>
-                    <p>发布日期：{{ blog.created_time | date:"Y-m-d H:n:s" }}</p>
+                    <p>发布日期：{{ blog.created_time | date:"Y-m-d H:nn:s" }}</p>
                     <p>分类：<a href="{% url 'blogs_with_type' blog.blog_type.pk %}">{{ blog.blog_type }}</a></p>
-                    <p>{{ blog.content | truncatechars:20 }}</p>
+                    <p>{{ blog.content | truncatechars:40 }}</p>
                 {% empty %}
                     <p>-- 暂无内容 --</p>
                 {% endfor %}
-                共有{{ blogs | length }}篇文章
 
             </div>
-
         </div>
+
+{% include "_pagination.html" %}
     </div>
+
 {% endblock %}

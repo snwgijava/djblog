@@ -1,0 +1,38 @@
+ <ul class="pagination">
+            <li>
+                {% if blogs.has_previous %}
+                    <a href="?page={{ blogs.previous_page_number.querystring }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                {% else %}
+                    <li class="disabled">
+                        <span aria-hidden="true">&laquo;</span>
+                    </li>
+                {% endif %}
+            </li>
+
+            {% for page_num in blogs.pages %}
+                {% if page_num %}
+                    {% ifequal page_num blogs.number %}
+                    <li class="active"><span>{{ page_num }}</span></li>
+                {% else %}
+                    <li><a href="?{{ page_num.querystring }}">{{ page_num }}</a></li>
+                {% endifequal %}
+                {% else %}
+                <li class="none"><a href="#">...</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if blogs.has_next %}
+                <li>
+                    <a href="?{{ blogs.next_page_number.querystring }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="disabled">
+                    <span aria-hidden="true">&raquo;</span>
+                </li>
+            {% endif %}
+
+        </ul>

@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pure_pagination',
     'djangoBlog',
+    'ckeditor',
+    'ckeditor_uploader',
+    # 'Pillow',
 
 ]
 
@@ -113,7 +116,7 @@ PAGINATION_SETTINGS = {
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'zh-Hans'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'UTC'
 
@@ -131,3 +134,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
+
+#media配置
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+#配置ckeditoer上传图片功能
+CKEDITOR_UPLOAD_PATH = 'upload/'

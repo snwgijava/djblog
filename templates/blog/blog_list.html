@@ -7,89 +7,76 @@
 {% block nav_blog_active %}active{% endblock %}
 
 {% block content %}
-    <div class="col-sm-9 col-md-9">
-        <div class="panel-heading">
-
+    <div class="col-9">
+        <div class="list-title">
             {% if blog_type %}
-                {{ blog_type.type_name }}列表（共有{{ blogs.paginator.count }}篇文章）
+               {{ blog_type.type_name }}列表（共有{{ blogs.paginator.count }}篇文章）
             {% else %}
                 文章列表（共有{{ blogs.paginator.count }}篇文章）
             {% endif %}
         </div>
-        <div class="panel-body">
-            <ul class="media-list">
-                {% for blog in blogs.object_list %}
-                    <article class="flex-left list-group-item post-item px-7">
-                        <div class="unit unit-1-on-mobile">
-                            <h3 class="top-gap-0 post-item-title"><a class=".media-heading"
-                                                                     href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
-                            </h3>
-                            <div class="media-body meta">
-                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{ blog.author }}
-                                <span> • </span>
-                                <a href="{% url 'blogs_with_type' blog.blog_type.pk %}">
-                                    <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-                                    {{ blog.blog_type }}</a>
-                                <span> • </span>
-                                <span class="text-small text-faded">{{ blog.read_num }}</span>
-                                <span> • </span>
-                                <span class="glyphicon glyphicon-time"
-                                      aria-hidden="true"></span>{{ blog.created_time | date:"Y-m-d H:nn:s" }}
-                            </div>
+        <ul class="media-list">
+            {% for blog in blogs.object_list %}
+                <article class="flex-left list-group-item post-item px-7">
+                    <div class="unit unit-1-on-mobile">
+                        <h3 class="top-gap-0 post-item-title"><a class=".media-heading"
+                                                                 href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
+                        </h3>
+                        <div class="media-body meta">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ blog.author }}
+                            <span> • </span>
+                            <a href="{% url 'blogs_with_type' blog.blog_type.pk %}">
+                                <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                                {{ blog.blog_type }}</a>
+                            <span> • </span>
+                            <i class="fas fa-eye"></i> {{ blog.get_read_num }}
+                            <span> • </span>
+                            <span class="far fa-calendar-alt"
+                                  aria-hidden="true"></span> {{ blog.created_time | date:"Y-m-d H:nn:s" }}
                         </div>
-
-                    </article>
-                    <div class="card-footer text-muted" style="background-color: #66CCFF">
-                        <a style="margin-left: 500px;color: #FFFFFF;" href="{% url 'blog_detail' blog.pk %}">阅读文章</a>
                     </div>
-
+                </article>
+                <div class="card-footer text-muted" style="background-color: #66CCFF;max-height: 2.5em">
+                    <p class="text-right"><a  style="color: #FFFFFF;" href="{% url 'blog_detail' blog.pk %}">阅读文章</a></p>
+                </div>
                 <br>
-                {% endfor %}
-            </ul>
-            {% include "_pagination.html" %}
-        </div>
-
+            {% endfor %}
+        </ul>
+        {% include "_pagination.html" %}
     </div>
-
 {% endblock %}
 
 {% block tags %}
-    <div class="col-sm-3 col-md-3 hidden-xs">
-        <div class="panel panel-default">
-            <div class="panel-body active-users">
-                <div class="text-center tag_title">博客分类</div>
-                <hr>
-                {% get_categories as blog_types %}
-                {% for blog_type in blog_types %}
-                    <a class="media" href="{% url 'blogs_with_type' blog_type.pk %}">
-                        <div class="media-body">
+    <div class="col-3 .d-none">
+        <div class="card-header active-users" style="background-color: white;">
+            <div class="text-center tag_title">博客分类</div>
+            <hr>
+            {% get_categories as blog_types %}
+            {% for blog_type in blog_types %}
+                <a class="media" href="{% url 'blogs_with_type' blog_type.pk %}">
+                    <div class="media-body">
                         <span class="media-heading">{{ blog_type.type_name }}
                             ({{ blog_type.num_blog_types }})</span>
-                        </div>
-                    </a>
-
-                {% empty %}
-                    <p>暂无分类</p>
-                {% endfor %}
-            </div>
+                    </div>
+                </a>
+            {% empty %}
+                <p>暂无分类</p>
+            {% endfor %}
         </div>
-        <div class="panel panel-default">
-            <div class="panel-body active-users">
-                <div class="text-center tag_title">日期归档</div>
-                <hr>
-                {% archives as blog_dates %}
-                {% for blog_date in blog_dates %}
-                    <a class="media" href="{% url 'blogs_with_date' blog_date.year blog_date.month %}">
-                        <div class="media-body">
-                            <span class="media-heading">{{ blog_date.year }}年{{ blog_date.month }}月</span>
-                        </div>
-                    </a>
-
-                {% empty %}
-                    <p>暂无归档</p>
-                {% endfor %}
-            </div>
-
+        <br>
+        <div class="card-header active-users" style="background-color: white;">
+            <div class="text-center tag_title">日期归档</div>
+            <hr>
+            {% archives as blog_dates %}
+            {% for blog_date in blog_dates %}
+                <a class="media" href="{% url 'blogs_with_date' blog_date.year blog_date.month %}">
+                    <div class="media-body">
+                        <span class="media-heading">{{ blog_date.year }}年{{ blog_date.month }}月</span>
+                    </div>
+                </a>
+            {% empty %}
+                <p>暂无归档</p>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

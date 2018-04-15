@@ -5,5 +5,81 @@
 {% block nav_home_active %}active{% endblock %}
 
 {% block content %}
-    <h3 class="home-content">欢迎访问我的个人博客</h3>
+     <div class="col-9">
+    <div>
+        <h3 class="home-content">欢迎访问我的个人博客</h3>
+        <!-- 图表容器 DOM -->
+        <div class="viewsDOM" id="container"></div>
+    </div>
+     </div>
+    <div class="col-3">
+    <div class="card-header active-users" style="background-color: white;">
+            <div class="text-center tag_title">今天热门文章</div>
+            <hr>
+            {% for hot_date in today_hot_date %}
+                <a class="media" href="{% url 'blog_detail' hot_date.content_object.pk %}">
+                    <div class="media-body">
+                        <span class="media-heading">{{ hot_date.content_object.title }}
+{#                            ({{ hot_date.read_num }})#}
+                        </span>
+                    </div>
+                </a>
+            {% empty %}
+                <p>今天暂时没有热门文章</p>
+            {% endfor %}
+        </div>
+    <br>
+     <div class="card-header active-users" style="background-color: white;">
+            <div class="text-center tag_title">七天热门文章</div>
+            <hr>
+            {% for hot_blog in hot_data_for_7_days %}
+                <a class="media" href="{% url 'blog_detail' hot_blog.id %}">
+                    <div class="media-body">
+                        <span class="media-heading">{{ hot_blog.title }}
+{#                            ({{ hot_blog.read_num_sum }}) #}
+                        </span>
+                    </div>
+                </a>
+            {% empty %}
+                <p>七天暂时没有热门文章</p>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script>
+        // 图表配置
+        var options = {
+            chart: {
+                type: 'line'                          //指定图表的类型，默认是折线图（line）
+            },
+            title: {
+                text: '最近一周访问量'                 // 标题
+            },
+            xAxis: {
+                categories: {{ dates | safe }},   // x 轴分类
+                tickmarkPlacement: 'on'
+            },
+            yAxis: {
+                title: {
+                    text: null                // y 轴标题
+                },
+                labels: {enabled: false},
+                gridLineDashStyle: 'Dash',
+            },
+            series: [{                              // 数据列
+                name: '访问量',                        // 数据列名
+                data: {{ read_nums }}                     // 数据
+            }],
+
+            legend: {enabled: false},
+            credits: {enabled: false},
+        };
+        // 图表初始化函数
+        var chart = Highcharts.chart('container', options);
+    </script>
 {% endblock %}

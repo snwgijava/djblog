@@ -4,16 +4,14 @@
 }
 
 body {
-    margin-top: 70px !important;
+    margin-top: 80px !important;
 }
 
 h3.home-content {
     font-size: 234%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 2em;
 }
 
 ul.blog-detail-ul li {
@@ -30,14 +28,18 @@ div.blog-detail-up-down {
     color: red;
 }
 
-a {
-    text-decoration: none;
+
+hr {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border: 0;
+    border-top: 1px solid #dcebf5;
 }
 
 .navbar-fixed-top {
     border-color: #e7e7e7;
     background-color: #fff;
-!important;
+/ important;
     -webkit-box-shadow: 0px 1px 11px 2px rgba(42, 42, 42, 0.1);
     box-shadow: 0px 1px 11px 2px rgba(42, 42, 42, 0.1);
     border-top: 4px solid #00b5ad;
@@ -60,27 +62,55 @@ a {
 
 a {
     color: #444444;
+    text-decoration: none;
 }
 
-.meta,.meta > a{
+.meta, .meta > a {
     font-size: 0.9em;
     color: #b3b3b3;
     zoom: 1;
-  overflow: hidden;
+    overflow: hidden;
 }
 
-
-.card-footer{
+.card-footer {
     padding: 10px;
 }
 
-.panel-heading{
+.panel-heading {
     background-color: white;
     border: 1px solid #ddd;
 }
 
-#bs-example-navbar-collapse-1{
+#bs-example-navbar-collapse-1 {
     background-color: white;
 }
+
+div.viewsDOM {
+    min-width: 20em;
+    max-width: 30em;
+    height: 20em;
+    margin: 0 auto;
+}
+
+.page-down {
+    margin-left: 12em;
+    display: inline;
+}
+
+.page-up {
+    display: inline;
+}
+
+.list-title{
+    background-color: white;
+    border: 1px solid rgba(0,0,0,.125);
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    /*min-height: 2.5em;*/
+    padding: 0.5em 1.5em;
+}
+
+
+
 
 

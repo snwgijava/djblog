@@ -20,7 +20,7 @@ class Blog(models.Model,ReadNumExpandMethod):
     author = models.ForeignKey(User,on_delete=models.DO_NOTHING)
     blog_type = models.ForeignKey(BlogType, on_delete=models.DO_NOTHING)
     read_details = GenericRelation(ReadDetail)
-    created_time = models.DateTimeField()
+    created_time = models.DateTimeField(auto_now_add=True)
     last_update_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

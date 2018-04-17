@@ -5,14 +5,14 @@
 {% block nav_home_active %}active{% endblock %}
 
 {% block content %}
-     <div class="col-9">
+     <div class="col-sm-9 col-md-9">
     <div>
         <h3 class="home-content">欢迎访问我的个人博客</h3>
         <!-- 图表容器 DOM -->
         <div class="viewsDOM" id="container"></div>
     </div>
      </div>
-    <div class="col-3">
+    <div class="col-sm-3 col-md-3">
     <div class="card-header active-users" style="background-color: white;">
             <div class="text-center tag_title">今天热门文章</div>
             <hr>
@@ -48,9 +48,8 @@
 
 
 {% endblock %}
-
 {% block js %}
-    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+     <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
     <script>
         // 图表配置
         var options = {

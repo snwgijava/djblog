@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'djangoBlog',
     'read_views',
+    'comment',
 
 
 ]
@@ -148,6 +149,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
+# STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 #media配置
 MEDIA_URL = '/media/'

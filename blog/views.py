@@ -1,5 +1,6 @@
 import datetime
 from django.contrib import auth
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from django.shortcuts import render_to_response
 from django.contrib.contenttypes.models import ContentType
@@ -10,7 +11,7 @@ from django.core.cache import cache
 
 from djangoBlog.models import Blog
 from read_views.utls import get_seven_days_read_data,get_today_hot_data
-from . forms import LoginForm
+from . forms import LoginForm,RegForm
 
 
 def get_7_days_hot_blogs():
@@ -59,3 +60,30 @@ def login(request):
     content = {}
     content['login_form'] = login_form
     return render(request,'login.html',content)
+
+def register(request):
+    if request.method == 'POST':
+        register_form = RegForm(request.POST)
+        if register_form.is_valid():
+            username = register_form.cleaned_data['username']
+            email = register_form.cleaned_data['email']
+            password = register_form.cleaned_data['password']
+            #创建用户
+            user = User.objects.create_user(username,email,password)
+            user.save()
+
+            # user = User()
+            # user.username = username
+            # user.email = email
+            # user.set_password(password)
+            # user.save()
+
+            #登录用户
+            user = auth.authenticate(username=username,password=password)
+            auth.login(request,user)
+            return redirect(request.GET.get('from',reverse('home')))
+    else:
+        register_form = RegForm()
+    content = {}
+    content['register_form'] = register_form
+    return render(request,'register.html',content)

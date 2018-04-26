@@ -119,6 +119,39 @@ h3.comment-area-title{
     padding-bottom: 0.4em;
 }
 
+div.django-ckeditor-widget{
+    width: 100%;
+}
+
+div.comment{
+    border-bottom: 1px dashed #ccc;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+div.reply{
+    margin-left: 2em;
+}
+
+#reply_content_container{
+    display: none;
+    border: 1px solid #e0e0e0;
+    border-bottom: none;
+    background-color: white;
+    overflow: hidden;
+    padding: 1em 1em 0.5em;
+}
+
+#reply_title{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5em;
+}
+
+.tag_a{
+    margin: 2px 2px;
+}
+
+
 
 
 

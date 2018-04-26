@@ -139,7 +139,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -157,3 +157,24 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 #配置ckeditoer上传图片功能
 CKEDITOR_UPLOAD_PATH = 'upload/'
+#评论ckeditoer配置
+CKEDITOR_CONFIGS = {
+    'default':{
+
+    },
+    'comment_ckeditor': {
+        'toolbar': 'custom',
+        'toolbar_custom': [
+            ['Bold', 'Italic', 'Underline','Strike','Subscript','Superscript'],
+            ['TextColor','BGColor','RemoveFormat'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink'],
+            ['Smiley', 'SpecialChar','Blockquote'],
+        ],
+        'height': 180,
+        'width': 'auto',
+        'tabSpaces':4,
+        'removePlugins':'elementspath',
+        'resize_enabled':False,
+    },
+}

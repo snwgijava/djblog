@@ -1,6 +1,7 @@
 {% extends 'blog/blog_list.html' %}
 {% load static %}
 {% load comment_tags %}
+{% load likes_tags %}
 {% block title %}{{ blog.title }}{% endblock %}
 
 {% block nav_blog_active %}active{% endblock %}
@@ -19,18 +20,18 @@
                         <span class="fa fa-user" aria-hidden="true"></span> {{ blog.author }}
                         <span> • </span>
                         <a href="{% url 'blogs_with_type' blog.blog_type.pk %}">
-                           <i class="fa fa-folder-o" aria-hidden="true"></i>
+                            <i class="fa fa-folder-o" aria-hidden="true"></i>
                             {{ blog.blog_type }}</a>
                         <span> • </span>
                         <span class="fas fa-eye"></span> {{ blog.get_read_num }}
                         <span> • </span>
                         <span class="fa fa-comments"></span> {% get_comment_count blog %}
                         <span> • </span>
-                         <i class="fa fa-tags" aria-hidden="true"></i>
-                            {% for tag in blog.blog_tag.all %}
-                                <a href="{% url 'blogs_with_tag' tag.pk %}">{{ tag.tag_name }}</a>
-                            {% endfor %}
-                            <span> • </span>
+                        <i class="fa fa-tags" aria-hidden="true"></i>
+                        {% for tag in blog.blog_tag.all %}
+                            <a href="{% url 'blogs_with_tag' tag.pk %}">{{ tag.tag_name }}</a>
+                        {% endfor %}
+                        <span> • </span>
                         <span class="far fa-calendar-alt"
                               aria-hidden="true"></span> {{ blog.created_time | date:"Y-m-d H:i:s" }}
                     </div>
@@ -40,7 +41,10 @@
                         {{ blog.content | safe }}
                     {% endautoescape %}
                 </div>
-                <br>
+                <div class="like" onclick="likeChange(this,'blog',{{ blog.pk }})">
+                    <i class="fa fa-thumbs-up {% get_like_status blog %}" aria-hidden="true"></i>
+                    <span class="like-num">{% get_like_count blog %}</span> 喜欢
+                </div>
                 <div class="blog-detail-up-down">
                     <div class="page-up text-left">
                         {% if previous_blog %}
@@ -52,8 +56,6 @@
                         {% endif %}
                     </div>
                     <div class="page-down text-right">
-
-
                         {% if next_blog %}
                             <a href="{% url 'blog_detail' next_blog.pk %}">
                                 下一篇：{{ next_blog.title | truncatechars:20 }}
@@ -103,8 +105,13 @@
                         <div class="comment" id="root_{{ comment.pk }}">
                             <span>{{ comment.user.username }}</span>
                             <span>({{ comment.comment_time | date:"Y-m-d H:i:s" }}):</span>
-                            <div id="comment_{{ omment.pk }}">
+                            <div id="comment_{{ comment.pk }}">
                                 {{ comment.text | safe }}
+                            </div>
+                            <div class="like"
+                                 onclick="likeChange(this,'{% get_content_type comment %}',{{ comment.pk }})">
+                                <i class="fa fa-thumbs-up {% get_like_status comment %}" aria-hidden="true"></i>
+                                <span class="like-num">{% get_like_count comment %}</span>
                             </div>
                             <a href="javascript:reply({{ comment.pk }})">回复</a>
 
@@ -116,6 +123,11 @@
                                     <span>{{ reply.reply_to.username }}</span>
                                     <div id="comment_{{ reply.pk }}">
                                         {{ reply.text | safe }}
+                                    </div>
+                                    <div class="like"
+                                         onclick="likeChange(this,'{% get_content_type reply %}',{{ reply.pk }})">
+                                        <i class="fa fa-thumbs-up {% get_like_status reply %}" aria-hidden="true"></i>
+                                        <span class="like-num">{% get_like_count reply %}</span>
                                     </div>
                                     <a href="javascript:reply({{ reply.pk }})">回复</a>
                                 </div>
@@ -129,6 +141,32 @@
             </div>
         </div>
 
+        <div class="modal fade" id="login_model" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <form id="login_model_form" action="" method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title">登录</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            {% for field in login_form %}
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                            {% endfor %}
+                            <span class="text-danger" id="login_model_tip"></span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">登录</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}
@@ -137,6 +175,14 @@
     <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
     <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
     <script>
+        String.prototype.format = function () {
+            var str = this;
+            for (var i = 0; i < arguments.length; i++) {
+                str = str.replace(new RegExp('\\{' + i + '\\}', 'g'), arguments[i])
+            }
+            ;
+            return str;
+        };
         $(function () {
             $("#comment_form").submit(function () {
                 $('#comment-error').text('');
@@ -159,16 +205,36 @@
                             //插入数据
                             if ($('#reply_comment_id').val() == '0') {
                                 //插入评论
-                                var comment_html = '<div class="comment" id="root_' + data['pk'] + '"> <span>' + data['username'] + '</span>' +
-                                    '<span>(' + timeFormat(data['comment_time']) + '):</span> <div id="comment_' + data['pk'] + '">'
-                                    + data['text'] + '</div> <a href="javascript:reply(' + data['pk'] + ')"> 回复 </a></div>';
+                                {#var comment_html = '<div class="comment" id="root_' + data['pk'] + '"> <span>' + data['username'] + '</span>' +#}
+                                {#    '<span>(' + timeFormat(data['comment_time']) + '):</span> <div id="comment_' + data['pk'] + '">'#}
+                                {#    + data['text'] + '</div> <a href="javascript:reply(' + data['pk'] + ')"> 回复 </a></div>';#}
+
+                                var comment_html = '<div class="comment" id="root_{0}"><span>{1}</span>' +
+                                    '<span>({2}):</span><div id="comment_{0}">{3}</div><div class="like"' +
+                                    'onclick="likeChange(this,\'{4}\',{0})">' +
+                                    '<i class="fa fa-thumbs-up" aria-hidden="true"></i> <span class="like-num">0</span>' +
+                                    '<a href="javascript:reply({0})">回复</a></div>';
+
+                                comment_html = comment_html.format(data['pk'], data['username'], timeFormat(data['comment_time']),
+                                    data['text'], data['content_type']);
                                 $("#comment_list").prepend(comment_html);
                             } else {
                                 //插入回复
-                                var reply_html = '<div class="reply"> <span>' + data['username'] + '</span>' +
-                                    ' <span>(' + timeFormat(data['comment_time']) + '):</span> <span> 回复 </span> ' + '<span>' + data['username']
-                                    + '</span> <div id="comment_' + data['pk'] + '">' + data['text'] + '' +
-                                    ' </div> <a href="javascript:reply(' + data['pk'] + ')"> 回复 </a> </div>';
+                                {#var reply_html = '<div class="reply"> <span>' + data['username'] + '</span>' +#}
+                                {#    ' <span>(' + timeFormat(data['comment_time']) + '):</span> <span> 回复 </span> ' + '<span>' + data['reply_to']#}
+                                {#    + '</span> <div id="comment_' + data['pk'] + '">' + data['text'] + '' +#}
+                                {#    ' </div> <a href="javascript:reply(' + data['pk'] + ')"> 回复 </a> </div>';#}
+
+                                var reply_html = '<div class="reply"><span>{1}</span>\n' +
+                                    ' <span>({2}):</span><span><i class="fa fa-share" aria-hidden="true"></i></span>\n' +
+                                    '<span>{3}</span><div id="comment_{0}">{4}</div>\n' +
+                                    '<div class="like"onclick="likeChange(this,\'{5}\',{0})">\n' +
+                                    '<i class="fa fa-thumbs-up" aria-hidden="true"></i> \n' +
+                                    '<span class="like-num">0</span></div>\n' +
+                                    '<a href="javascript:reply({0})">回复</a></div>';
+
+                                reply_html = reply_html.format(data['pk'], data['username'], timeFormat(data['comment_time']),
+                                    data['reply_to'], data['text'], data['content_type']);
                                 $("#root_" + data['root_pk']).append(reply_html);
                             }
 
@@ -211,5 +277,65 @@
                 CKEDITOR.instances['id_text'].focus();
             });
         }
+
+        function likeChange(obj, content_type, object_id) {
+            var is_like = obj.getElementsByClassName('active').length == 0
+            $.ajax({
+                url: "{% url 'like_change' %}",
+                type: 'GET',
+                data: {
+                    content_type: content_type,
+                    object_id: object_id,
+                    is_like: is_like
+                },
+                cache: false,
+                success: function (data) {
+                    console.log(data)
+                    if (data['status'] == 'SUCCESS') {
+                        //更新点赞状态
+                        var element = $(obj.getElementsByClassName('fa-thumbs-up'));
+                        if (is_like) {
+                            element.addClass('active');
+                        } else {
+                            element.removeClass('active');
+                        }
+                        //更新点赞数量
+                        var liked_num = $(obj.getElementsByClassName('like-num'));
+                        liked_num.text(data['liked_num'])
+
+                    } else {
+                        if (data['code'] == 400) {
+                            $('#login_model').modal('show')
+                        } else {
+                            alert(data['message'])
+                        }
+
+                    }
+                },
+                error: function (xhr) {
+                    console.log(xhr)
+                }
+            });
+        }
+
+        $('#login_model_form').submit(function (event) {
+            {#阻止提交#}
+            event.preventDefault();
+            $.ajax({
+               url:'{% url 'login_for_model' %}',
+               type:'POST',
+                data:$(this).serialize(),
+                cache:false,
+                success:function (data) {
+                    if(data['status'] == 'SUCCESS'){
+                        {#登录成功刷新当前页面#}
+                        window.location.reload();
+                    }else{
+                        $('#login_model_tip').text('用户名或密码不正确')
+                    }
+                }
+            });
+            {#return false;#}
+        });
     </script>
 {% endblock %}

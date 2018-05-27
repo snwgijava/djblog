@@ -10,11 +10,19 @@ from read_views.models import ReadNum, ReadNumExpandMethod,ReadDetail
 class BlogType(models.Model):
     type_name = models.CharField(max_length=15,verbose_name='分类')
 
+    class Meta:
+        verbose_name = '文章分类'
+        verbose_name_plural = verbose_name
+
     def __str__(self):
         return self.type_name
 
 class BlogTag(models.Model):
     tag_name = models.CharField(max_length=15,verbose_name='标签')
+
+    class Meta:
+        verbose_name = '文章标签'
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.tag_name
@@ -34,7 +42,10 @@ class Blog(models.Model,ReadNumExpandMethod):
         return "<Blog:%s>" % self.title
 
     class meta:
+        verbose_name = '博客文章'
+        verbose_name_plural = verbose_name
         order = ['-created_time']
+
 
 
 

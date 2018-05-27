@@ -26,7 +26,9 @@ urlpatterns = [
     path('ckeditor',include('ckeditor_uploader.urls')),
     path('blog/',include('djangoBlog.urls'),name='blog'),
     path('comment/',include('comment.urls'),name='comment'),
+    path('likes/',include('likes.urls'),name='likes'),
     path('login/',views.login,name='login'),
+    path('login_for_model/',views.login_model_form,name='login_for_model'),
     path('register/',views.register,name='register'),
 ]
 

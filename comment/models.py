@@ -20,7 +20,10 @@ class Comment(models.Model):
     reply_to = models.ForeignKey(User,related_name='replies',null=True,on_delete=models.CASCADE)
 
     class Meta:
+        verbose_name = '评论'
+        verbose_name_plural = verbose_name
         ordering = ['comment_time']
+
 
     def __str__(self):
         return self.text

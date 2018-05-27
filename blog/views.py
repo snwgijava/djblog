@@ -1,6 +1,7 @@
 import datetime
 from django.contrib import auth
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.shortcuts import render_to_response
 from django.contrib.contenttypes.models import ContentType
@@ -60,6 +61,17 @@ def login(request):
     content = {}
     content['login_form'] = login_form
     return render(request,'login.html',content)
+
+def login_model_form(request):
+    login_form = LoginForm(request.POST)
+    data = {}
+    if login_form.is_valid():
+        user = login_form.cleaned_data['user']
+        auth.login(request, user)
+        data['status'] = 'SUCCESS'
+    else:
+        data['status'] = 'ERROR'
+    return JsonResponse(data)
 
 def register(request):
     if request.method == 'POST':

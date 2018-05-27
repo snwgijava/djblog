@@ -3,6 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.views.generic import ListView
 from pure_pagination import Paginator,EmptyPage,PageNotAnInteger
 
+from blog.forms import LoginForm
 from .models import Blog, BlogType, BlogTag
 from read_views.utls import read_views
 from comment.models import Comment
@@ -36,6 +37,7 @@ def blog_detail(request,blog_pk):
     context['blog'] = blog
     context['previous_blog'] = Blog.objects.filter(created_time__lt=blog.created_time).last()
     context['next_blog'] = Blog.objects.filter(created_time__gt=blog.created_time).first()
+    context['login_form'] = LoginForm()
     response = render(request,'blog/blog_detail.html', context)
     response.set_cookie(read_cookie_key,'true') #阅读cookie标记
     return response

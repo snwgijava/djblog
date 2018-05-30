@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}个人资料{% endblock %}
+
+{% block nav_home_active %}active{% endblock %}
+
+{% block content %}
+    <div class="col-sm-9 col-md-9">
+    {% if user.is_authenticated %}
+        <h2>{{ user.username }}</h2>
+        <ul>
+            <div>昵称：<a href="#">修改昵称</a></div>
+            <div>邮箱:{% if user.email %}{{ user.email }}{% else %}未绑定<a href="#">绑定邮箱</a> {% endif %}</div>
+            <div>上次登录时间:{{ user.last_login }}</div>
+            <div><a href="#">修改密码</a></div>
+        </ul>
+    {% else %}
+        <span>未登录，跳转到首页</span>
+        <script>
+            window.location.href='/'
+        </script>
+    {% endif %}
+    </div>
+{% endblock %}

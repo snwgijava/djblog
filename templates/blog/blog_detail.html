@@ -1,4 +1,4 @@
-{% extends 'blog/blog_list.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% load comment_tags %}
 {% load likes_tags %}
@@ -153,7 +153,7 @@
                         </div>
                         <div class="modal-body">
                             {% csrf_token %}
-                            {% for field in login_form %}
+                            {% for field in login_model_form %}
                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                 {{ field }}
                             {% endfor %}

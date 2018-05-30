@@ -164,6 +164,10 @@ div.like .active{
     color: red;
 }
 
+ul.navbar-right{
+    margin-right: 0px;
+}
+
 
 
 

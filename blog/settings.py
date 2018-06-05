@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-
+from . import config
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -24,12 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ky2*pt0sx^4&#gb5gzf$2x-+q#ppt*j4z94=9tiwfj$eppul5)'
+SECRET_KEY = config.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config.DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','127.0.0.1','.ybyangj.cn']
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'comment',
     'likes',
     'user',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -86,13 +87,14 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangoblog',  #数据库名
-        'USER':'root',           #用户名
-        'PASSWORD':'yangjian',       #密码
-        'HOST':'127.0.0.1',      #本机地址
+        'NAME': config.DATA_NAME,  #数据库名
+        'USER':config.DATA_USER,           #用户名
+        'PASSWORD':config.DATA_PASSWD,       #密码
+        'HOST':config.DATA_HOST,      #本机地址
 
     }
 }

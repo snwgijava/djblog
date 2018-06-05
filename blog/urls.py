@@ -29,6 +29,7 @@ urlpatterns = [
     path('comment/',include('comment.urls'),name='comment'),
     path('likes/',include('likes.urls'),name='likes'),
     path('user/',include('user.urls'),name='user'),
+    path('captcha/',include('captcha.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

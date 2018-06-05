@@ -1,8 +1,8 @@
 import datetime
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
-from django.db.models import Sum
+from django.db.models import Sum,Q
 from django.core.cache import cache
 from djangoBlog.models import Blog
 from read_views.utls import get_seven_days_read_data,get_today_hot_data
@@ -33,4 +33,7 @@ def home(request):
     context['today_hot_date'] = get_today_hot_data(blog_content_type)
     context['hot_data_for_7_days'] = hot_data_for_7_days
     return render_to_response('home.html',context)
+
+
+
 

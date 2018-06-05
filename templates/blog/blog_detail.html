@@ -20,17 +20,12 @@
                         <span class="fa fa-user" aria-hidden="true"></span> {{ blog.author }}
                         <span> • </span>
                         <a href="{% url 'blogs_with_type' blog.blog_type.pk %}">
-                            <i class="fa fa-folder-o" aria-hidden="true"></i>
+                            <i class="fa fa-folder-open" aria-hidden="true"></i>
                             {{ blog.blog_type }}</a>
                         <span> • </span>
                         <span class="fas fa-eye"></span> {{ blog.get_read_num }}
                         <span> • </span>
                         <span class="fa fa-comments"></span> {% get_comment_count blog %}
-                        <span> • </span>
-                        <i class="fa fa-tags" aria-hidden="true"></i>
-                        {% for tag in blog.blog_tag.all %}
-                            <a href="{% url 'blogs_with_tag' tag.pk %}">{{ tag.tag_name }}</a>
-                        {% endfor %}
                         <span> • </span>
                         <span class="far fa-calendar-alt"
                               aria-hidden="true"></span> {{ blog.created_time | date:"Y-m-d H:i:s" }}
@@ -42,9 +37,16 @@
                     {% endautoescape %}
                 </div>
                 <div class="like" onclick="likeChange(this,'blog',{{ blog.pk }})">
-                    <i class="fa fa-thumbs-up {% get_like_status blog %}" aria-hidden="true"></i>
-                    <span class="like-num">{% get_like_count blog %}</span> 喜欢
+                    <i class="fa fa-thumbs-up fa-2x {% get_like_status blog %}" aria-hidden="true"></i>
+                    <span class="like-num">{% get_like_count blog %}</span>
                 </div>
+            <div>
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                {% for tag in blog.blog_tag.all %}
+                    <a href="{% url 'blogs_with_tag' tag.pk %}">{{ tag.tag_name }}</a>
+                {% endfor %}
+            </div>
+            <br>
                 <div class="blog-detail-up-down">
                     <div class="page-up text-left">
                         {% if previous_blog %}
@@ -97,9 +99,9 @@
                 {% endif %}
 
             </div>
-            <div class="comment-area ">
+            <div class="comment-area" >
                 <h3 class="comment-area-title">评论列表</h3>
-                <div id="comment_list">
+                <div id="comment_list" style="background-color: white">
                     {% get_comment_list blog as comments %}
                     {% for comment in comments %}
                         <div class="comment" id="root_{{ comment.pk }}">
@@ -116,7 +118,7 @@
                             <a href="javascript:reply({{ comment.pk }})">回复</a>
 
                             {% for reply in comment.root_comment.all %}
-                                <div class="reply">
+                                <div class="reply" style="background-color: #F2F6FC">
                                     <span>{{ reply.user.username }}</span>
                                     <span>({{ reply.comment_time | date:"Y-m-d H:i:s" }}):</span>
                                     <span><i class="fa fa-share" aria-hidden="true"></i></span>

@@ -27,19 +27,19 @@
                             <span class="fa fa-user" aria-hidden="true"></span> {{ blog.author }}
                             <span> • </span>
                             <a href="{% url 'blogs_with_type' blog.blog_type.pk %}">
-                                <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
                                 {{ blog.blog_type }}
                             </a>
                             <span> • </span>
                             <i class="fas fa-eye"></i> {{ blog.get_read_num }}
                             <span> • </span>
-                            <span class="fa fa-comments"></span> {% get_comment_count blog %}
-                            <span> • </span>
-                            <i class="fa fa-tags" aria-hidden="true"></i>
-                            {% for tag in blog.blog_tag.all %}
-                                <a href="{% url 'blogs_with_tag' tag.pk %}">{{ tag.tag_name }}</a>
-                            {% endfor %}
-                            <span> • </span>
+{#                            <span class="fa fa-comments"></span> {% get_comment_count blog %}#}
+{#                            <span> • </span>#}
+{#                            <i class="fa fa-tags" aria-hidden="true"></i>#}
+{#                            {% for tag in blog.blog_tag.all %}#}
+{#                                <a href="{% url 'blogs_with_tag' tag.pk %}">{{ tag.tag_name }}</a>#}
+{#                            {% endfor %}#}
+{#                            <span> • </span>#}
                             <span class="far fa-calendar-alt"
                                   aria-hidden="true"></span> {{ blog.created_time | date:"Y-m-d H:i:s" }}
                         </div>

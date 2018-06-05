@@ -39,8 +39,14 @@
             </li>
         </ul>
 
+        <nav class="navbar navbar-dark bg-dark mx-auto">
+            <form class="form-inline" action="{% url 'search' %}" method="get">
+                <input class="form-control mr-sm-2" name="search" id="search" type="search" placeholder="请输入文章标题"
+                       aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </nav>
         <ul class="nav navbar-nav navbar-right">
-
             {% if not user.is_authenticated %}
 
                 <li class="nav-item">
@@ -59,6 +65,10 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'user_info' %}">个人资料</a>
                         <div class="dropdown-divider"></div>
+                        {% if user.is_staff or user.is_superuser %}
+                            <a class="dropdown-item" href="{% url 'admin:index' %}">后台管理</a>
+                            <div class="dropdown-divider"></div>
+                        {% endif %}
                         <a class="dropdown-item" href="{% url 'logout' %}?from={{ request.get_full_path }}">退出</a>
                     </div>
                 </li>
@@ -78,11 +88,34 @@
 
     </div>
 </div>
+
+<div id="up">
+    <i class="el-icon-caret-top" id="ifa"></i>
+</div>
+
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    $("#up").hide();         //刚进入页面时设置为隐藏
+    $("#up").bind("click", function () {     //单击时返回顶部
+        $('html, body').animate({scrollTop: 0}, 300);
+        return false;
+    });
+    $(window).bind('scroll resize', function () {   //判断页面所在的位置，小于300就隐藏，否则就显示
+        if ($(window).scrollTop() <= 300) {
+            $("#up").hide();
+        } else {
+            $("#up").show();
+        }
+    });
+</script>
 {% block js %}
 {% endblock %}
 </body>

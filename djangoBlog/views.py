@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 from pure_pagination import Paginator,PageNotAnInteger
 
@@ -58,6 +59,16 @@ def blogs_with_tag(request,blog_tag_pk):
     context = {}
     blog_tag_list = Blog.objects.filter(blog_tag=blog_tag_pk)
     context['blogs'] = blog_pages(request,blog_tag_list)
+    return render(request,'blog/blog_list.html',context)
+
+def search(request):
+    context = {}
+    searchs = request.GET.get('search','')
+    if searchs is not None:
+        searchs = Blog.objects.filter(title__icontains=searchs).order_by('-created_time')
+    else:
+        searchs = Blog.objects.all().order_by('-created_time')
+    context['blogs'] = blog_pages(request, searchs)
     return render(request,'blog/blog_list.html',context)
 
 

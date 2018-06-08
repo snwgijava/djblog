@@ -41,10 +41,10 @@ class Blog(models.Model,ReadNumExpandMethod):
     def __str__(self):
         return "<Blog:%s>" % self.title
 
-    class meta:
+    class Meta:
         verbose_name = '博客文章'
         verbose_name_plural = verbose_name
-        order = ['-created_time']
+        # order = ['-created_time']
 
 
 

@@ -1,5 +1,5 @@
 {% load staticfiles %}
-
+{% load blog_tags %}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -13,9 +13,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
-              integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
-              crossorigin="anonymous">
     {% endblock %}
 
 
@@ -23,7 +20,7 @@
 <body style="background-color: #f5f8fa">
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navbar-dark bg-dark col-offset-1">
     <a class="navbar-brand" href="{% url "home" %}">
-        个人博客网站
+        杨剑的博客
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,12 +84,24 @@
         {% endblock %}
 
     </div>
+    <div id="up">
+        <i class="el-icon-caret-top" id="ifa"></i>
+    </div>
 </div>
 
-<div id="up">
-    <i class="el-icon-caret-top" id="ifa"></i>
-</div>
 
+<footer id="footer" class="fixed-bottom" style="background-color: #1ABC9C">
+    <div class="copyright">
+        <p class="text-center">欢迎来到我的博客 © 2018</p>
+    </div>
+    <div class="copyright">
+        <p class="text-center"><span>博客总访问量：{% get_view_nums %}</span></p>
+    </div>
+
+</footer>
+</body>
+
+<script src="https://use.fontawesome.com/69523c2039.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
@@ -118,5 +127,4 @@
 </script>
 {% block js %}
 {% endblock %}
-</body>
 </html>

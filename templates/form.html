@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+    <div class="col-sm-8 col-md-8">
+        <div class="card">
+            <h4 class="card-header">{{ form_title }}</h4>
+            <div class="card-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if not field.is_hidden %}
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {% endif %}
+                        {{ field }}
+                        <p class="text-danger">{{ field.errors.as_text }}</p>
+                    {% endfor %}
+                    <span class="pull-left text-danger">{{ login_form.non_field_errors }}</span>
+                    <p class="text-right">
+                        <button class="btn btn-primary" type="submit" value="{{ submit_text }}">{{ submit_text }}</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+

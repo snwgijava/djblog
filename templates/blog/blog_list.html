@@ -31,7 +31,7 @@
                                 {{ blog.blog_type }}
                             </a>
                             <span> • </span>
-                            <i class="fas fa-eye"></i> {{ blog.get_read_num }}
+                            <i class="fa fa-eye"></i> {{ blog.get_read_num }}
                             <span> • </span>
 {#                            <span class="fa fa-comments"></span> {% get_comment_count blog %}#}
 {#                            <span> • </span>#}
@@ -40,7 +40,7 @@
 {#                                <a href="{% url 'blogs_with_tag' tag.pk %}">{{ tag.tag_name }}</a>#}
 {#                            {% endfor %}#}
 {#                            <span> • </span>#}
-                            <span class="far fa-calendar-alt"
+                            <span class="fa fa-calendar-alt"
                                   aria-hidden="true"></span> {{ blog.created_time | date:"Y-m-d H:i:s" }}
                         </div>
                     </div>
@@ -52,6 +52,7 @@
             {% endfor %}
         </ul>
         {% include "_pagination.html" %}
+
     </div>
 {% endblock %}
 

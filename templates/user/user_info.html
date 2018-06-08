@@ -9,9 +9,9 @@
     {% if user.is_authenticated %}
         <h2>{{ user.username }}</h2>
         <ul>
-            <div>昵称：<a href="#">修改昵称</a></div>
+            <div>昵称：{{ user.user }}<a href="{% url 'change_nickname' %}?form={{ request.get_full_path }}">修改昵称</a></div>
             <div>邮箱:{% if user.email %}{{ user.email }}{% else %}未绑定<a href="#">绑定邮箱</a> {% endif %}</div>
-            <div>上次登录时间:{{ user.last_login }}</div>
+            <div>上次登录时间:{{ user.last_login }}<a href="#">绑定邮箱</a></div>
             <div><a href="#">修改密码</a></div>
         </ul>
     {% else %}

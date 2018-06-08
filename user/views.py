@@ -4,7 +4,8 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from . forms import LoginForm,RegForm
+from . forms import LoginForm,RegForm,ChangeNickNameForm
+from .models import UserProfile
 # Create your views here.
 
 
@@ -80,3 +81,23 @@ def logout(request):
 
 def user_info(request):
     return render(request,'user/user_info.html')
+
+def change_nickname(request):
+    redirect_to = request.GET.get('form',reverse('home'))
+    if request.method == 'POST':
+        form = ChangeNickNameForm(request.POST,user=request.user)
+        if form.is_valid():
+            nickname_new = form.cleaned_data['nickname_new']
+            user_profile,created = UserProfile.objects.get_or_create(user=request.user)
+            user_profile.nickname = nickname_new
+            user_profile.save()
+            return redirect(redirect_to)
+    else:
+        form = ChangeNickNameForm()
+
+    context = {}
+    context['page_title'] = '修改昵称'
+    context['form_title'] = '修改昵称'
+    context['submit_text'] = '修改'
+    context['form'] = form
+    return render(request,'form.html',context)

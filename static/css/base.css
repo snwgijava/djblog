@@ -6,6 +6,9 @@
 body {
     margin-top: 80px !important;
 }
+div.row{
+    padding-bottom: 5%;!important;
+}
 
 h3.home-content {
     font-size: 234%;
@@ -95,8 +98,8 @@ div.viewsDOM {
 }
 
 .page-down {
-    margin-left: 12em;
     display: inline;
+    /*margin-left: 10em;*/
 }
 
 .page-up {
@@ -127,12 +130,16 @@ div.django-ckeditor-widget{
 
 div.comment{
     border-bottom: 1px dashed #ccc;
-    margin-bottom: 0.5em;
+    /*margin-bottom: 0.5em;*/
     padding-bottom: 0.5em;
+    padding-top: 0.5em;
 }
 
 div.reply{
     margin-left: 2em;
+    background-color: #E4E7ED;
+    padding: 0em 0.5em;
+    border-bottom: 1px dashed #ccc;
 }
 
 #reply_content_container{
@@ -164,6 +171,8 @@ div.like .active{
     color: red;
 }
 
+
+
 ul.navbar-right{
     margin-right: 0px;
 }
@@ -191,7 +200,44 @@ div#up i{
     font-size: 18px;
 }
 
+div.copyright{
+    margin-bottom: -1%;
+}
 
+#comment_list{
+    padding: 0% 2%;
+}
+
+
+div.reply > div > p{
+    margin-left: 2em;
+    margin-top: 0.5em;
+}
+
+a.blog-tags-a,a.page-a{
+    color: #797878;
+    font-size: 0.9em;
+}
+
+a.blog-tags-a:hover{
+    text-decoration:none;
+    color: #66ccff;
+}
+
+a.media:hover{
+    text-decoration:none;
+    color: #66ccff;
+}
+
+a.page-a:hover{
+    text-decoration:none;
+    color: #66ccff;
+}
+
+div.comment-text{
+    margin-left: 1.5em;
+    margin-top: 1em;
+}
 
 
 

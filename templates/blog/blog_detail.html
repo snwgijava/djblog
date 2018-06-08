@@ -11,7 +11,7 @@
 
     <div class="col-sm-8 col-md-8">
         <div class="panel-body">
-            <article class="flex-left list-group-item post-item px-7">
+            <article class="flex-left list-group-item post-item px-7 detail">
                 <div class="unit unit-1-on-mobile">
                     <h3 class="top-gap-0 post-item-title"><a class=".media-heading"
                                                              href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
@@ -23,11 +23,11 @@
                             <i class="fa fa-folder-open" aria-hidden="true"></i>
                             {{ blog.blog_type }}</a>
                         <span> • </span>
-                        <span class="fas fa-eye"></span> {{ blog.get_read_num }}
+                        <span class="fa fa-eye"></span> {{ blog.get_read_num }}
                         <span> • </span>
                         <span class="fa fa-comments"></span> {% get_comment_count blog %}
                         <span> • </span>
-                        <span class="far fa-calendar-alt"
+                        <span class="fa fa-calendar-alt"
                               aria-hidden="true"></span> {{ blog.created_time | date:"Y-m-d H:i:s" }}
                     </div>
                 </div>
@@ -37,30 +37,30 @@
                     {% endautoescape %}
                 </div>
                 <div class="like" onclick="likeChange(this,'blog',{{ blog.pk }})">
-                    <i class="fa fa-thumbs-up fa-2x {% get_like_status blog %}" aria-hidden="true"></i>
+                    <i class="fa fa-thumbs-o-up fa-2x {% get_like_status blog %}" aria-hidden="true"></i>
                     <span class="like-num">{% get_like_count blog %}</span>
                 </div>
             <div>
                 <i class="fa fa-tags" aria-hidden="true"></i>
                 {% for tag in blog.blog_tag.all %}
-                    <a href="{% url 'blogs_with_tag' tag.pk %}">{{ tag.tag_name }}</a>
+                    <a href="{% url 'blogs_with_tag' tag.pk %}" class="blog-tags-a">{{ tag.tag_name }}</a>
                 {% endfor %}
             </div>
             <br>
-                <div class="blog-detail-up-down">
-                    <div class="page-up text-left">
+                <div class="blog-detail-up-down ">
+                    <div class="page-up  col-4">
                         {% if previous_blog %}
-                            <a href="{% url 'blog_detail' previous_blog.pk %}">
-                                上一篇：{{ previous_blog.title | truncatechars:20 }}
+                            <a href="{% url 'blog_detail' previous_blog.pk %}" class="page-a">
+                                上一篇：{{ previous_blog.title | truncatechars:10 }}
                             </a>
                         {% else %}
                             上一篇：没有了
                         {% endif %}
                     </div>
-                    <div class="page-down text-right">
+                    <div class="page-down col-4">
                         {% if next_blog %}
-                            <a href="{% url 'blog_detail' next_blog.pk %}">
-                                下一篇：{{ next_blog.title | truncatechars:20 }}
+                            <a href="{% url 'blog_detail' next_blog.pk %}" class="page-a">
+                                下一篇：{{ next_blog.title | truncatechars:10 }}
                             </a>
                         {% else %}
                             下一篇：没有了
@@ -105,33 +105,35 @@
                     {% get_comment_list blog as comments %}
                     {% for comment in comments %}
                         <div class="comment" id="root_{{ comment.pk }}">
-                            <span>{{ comment.user.username }}</span>
-                            <span>({{ comment.comment_time | date:"Y-m-d H:i:s" }}):</span>
-                            <div id="comment_{{ comment.pk }}">
+                            <span>{{ comment.user.username }}:</span>
+
+                            <div id="comment_{{ comment.pk }}" class="comment-text">
                                 {{ comment.text | safe }}
                             </div>
                             <div class="like"
                                  onclick="likeChange(this,'{% get_content_type comment %}',{{ comment.pk }})">
-                                <i class="fa fa-thumbs-up {% get_like_status comment %}" aria-hidden="true"></i>
+                                <i class="fa fa-thumbs-o-up {% get_like_status comment %}" aria-hidden="true"></i>
                                 <span class="like-num">{% get_like_count comment %}</span>
                             </div>
-                            <a href="javascript:reply({{ comment.pk }})">回复</a>
+                            <a href="javascript:reply({{ comment.pk }})" class="pull-right">回复</a>
+                             <span class="pull-right">{{ comment.comment_time | date:"Y-m-d H:i:s" }}&nbsp;&nbsp;</span>
 
                             {% for reply in comment.root_comment.all %}
-                                <div class="reply" style="background-color: #F2F6FC">
-                                    <span>{{ reply.user.username }}</span>
-                                    <span>({{ reply.comment_time | date:"Y-m-d H:i:s" }}):</span>
-                                    <span><i class="fa fa-share" aria-hidden="true"></i></span>
-                                    <span>{{ reply.reply_to.username }}</span>
+                                <div class="reply">
+                                    <span class="reply_name">{{ reply.user.username }}</span>&nbsp;
+                                    回复&nbsp;
+                                    <span>{{ reply.reply_to.username }}:</span>
                                     <div id="comment_{{ reply.pk }}">
                                         {{ reply.text | safe }}
                                     </div>
+
                                     <div class="like"
                                          onclick="likeChange(this,'{% get_content_type reply %}',{{ reply.pk }})">
-                                        <i class="fa fa-thumbs-up {% get_like_status reply %}" aria-hidden="true"></i>
+                                        <i class="fa fa-thumbs-o-up {% get_like_status reply %}" aria-hidden="true"></i>
                                         <span class="like-num">{% get_like_count reply %}</span>
                                     </div>
-                                    <a href="javascript:reply({{ reply.pk }})">回复</a>
+                                    <a href="javascript:reply({{ reply.pk }})" class="pull-right">回复</a>
+                                    <span class="pull-right">{{ reply.comment_time | date:"Y-m-d H:i:s" }}&nbsp;&nbsp;</span>
                                 </div>
                             {% endfor %}
                         </div>
@@ -207,33 +209,25 @@
                             //插入数据
                             if ($('#reply_comment_id').val() == '0') {
                                 //插入评论
-                                {#var comment_html = '<div class="comment" id="root_' + data['pk'] + '"> <span>' + data['username'] + '</span>' +#}
-                                {#    '<span>(' + timeFormat(data['comment_time']) + '):</span> <div id="comment_' + data['pk'] + '">'#}
-                                {#    + data['text'] + '</div> <a href="javascript:reply(' + data['pk'] + ')"> 回复 </a></div>';#}
-
-                                var comment_html = '<div class="comment" id="root_{0}"><span>{1}</span>' +
-                                    '<span>({2}):</span><div id="comment_{0}">{3}</div><div class="like"' +
+                                var comment_html = '<div class="comment" id="root_{0}"><span>{1}:</span>' +
+                                    '<div id="comment_{0}">{3}</div><div class="like"' +
                                     'onclick="likeChange(this,\'{4}\',{0})">' +
-                                    '<i class="fa fa-thumbs-up" aria-hidden="true"></i> <span class="like-num">0</span>' +
-                                    '<a href="javascript:reply({0})">回复</a></div>';
+                                    '<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <span class="like-num">0</span>' +
+                                    '</div><a href="javascript:reply({0})" class="pull-right">回复</a>&<span class="pull-right">{2}</span>&nbsp;';
 
                                 comment_html = comment_html.format(data['pk'], data['username'], timeFormat(data['comment_time']),
                                     data['text'], data['content_type']);
                                 $("#comment_list").prepend(comment_html);
                             } else {
                                 //插入回复
-                                {#var reply_html = '<div class="reply"> <span>' + data['username'] + '</span>' +#}
-                                {#    ' <span>(' + timeFormat(data['comment_time']) + '):</span> <span> 回复 </span> ' + '<span>' + data['reply_to']#}
-                                {#    + '</span> <div id="comment_' + data['pk'] + '">' + data['text'] + '' +#}
-                                {#    ' </div> <a href="javascript:reply(' + data['pk'] + ')"> 回复 </a> </div>';#}
-
-                                var reply_html = '<div class="reply"><span>{1}</span>\n' +
-                                    ' <span>({2}):</span><span><i class="fa fa-share" aria-hidden="true"></i></span>\n' +
-                                    '<span>{3}</span><div id="comment_{0}">{4}</div>\n' +
+                                 var reply_html = '<div class="reply"><span>{1}</span>\n' +
+                                    '&nbsp;回复&nbsp;\n' +
+                                    '<span>{3}:</span><div id="comment_{0}">{4}</div>\n' +
                                     '<div class="like"onclick="likeChange(this,\'{5}\',{0})">\n' +
-                                    '<i class="fa fa-thumbs-up" aria-hidden="true"></i> \n' +
+                                    '<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> \n' +
                                     '<span class="like-num">0</span></div>\n' +
-                                    '<a href="javascript:reply({0})">回复</a></div>';
+                                    '<a href="javascript:reply({0})" class="pull-right">回复</a>' +
+                                    '<span class="pull-right">{2}</span></div>';
 
                                 reply_html = reply_html.format(data['pk'], data['username'], timeFormat(data['comment_time']),
                                     data['reply_to'], data['text'], data['content_type']);
@@ -266,6 +260,7 @@
             var minute = datetime.getMinutes();
             var second = datetime.getSeconds();
             return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+
         }
 
         function reply(reply_comment_id) {
@@ -295,7 +290,7 @@
                     console.log(data)
                     if (data['status'] == 'SUCCESS') {
                         //更新点赞状态
-                        var element = $(obj.getElementsByClassName('fa-thumbs-up'));
+                        var element = $(obj.getElementsByClassName('fa-thumbs-o-up'));
                         if (is_like) {
                             element.addClass('active');
                         } else {
@@ -339,5 +334,8 @@
             });
             {#return false;#}
         });
+
+     $('.detail img').css({'width':'100%','height':'auto','visibility':'inherit'});
+
     </script>
 {% endblock %}

@@ -20,7 +20,6 @@
                 <a class="media" href="{% url 'blog_detail' hot_date.content_object.pk %}">
                     <div class="media-body">
                         <span class="media-heading">{{ hot_date.content_object.title }}
-{#                            ({{ hot_date.read_num }})#}
                         </span>
                     </div>
                 </a>
@@ -36,7 +35,6 @@
                 <a class="media" href="{% url 'blog_detail' hot_blog.id %}">
                     <div class="media-body">
                         <span class="media-heading">{{ hot_blog.title }}
-{#                            ({{ hot_blog.read_num_sum }}) #}
                         </span>
                     </div>
                 </a>
@@ -48,6 +46,7 @@
 
 
 {% endblock %}
+
 {% block js %}
     <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
     <script>

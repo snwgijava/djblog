@@ -180,7 +180,7 @@ CKEDITOR_CONFIGS = {
         # 插件
         'extraPlugins': ','.join(['codesnippet','uploadimage','widget','lineutils',]),
         'height': 180,
-        'width': 'auto%',
+        'width': 'auto',
         'tabSpaces':4,
         'removePlugins':'elementspath',
         'resize_enabled':False,

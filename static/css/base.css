@@ -5,6 +5,7 @@
 
 body {
     margin-top: 80px !important;
+    padding-bottom: 60px;
 }
 div.row{
     padding-bottom: 5%;!important;
@@ -180,7 +181,7 @@ ul.navbar-right{
 }
 
 div#up{
-    top: 90%;
+    top: 85%;
     left: 96%;
     background-color: #fff;
     position: fixed;
@@ -228,7 +229,7 @@ a.blog-tags-a,a.page-a{
 
 a.blog-tags-a:hover{
     text-decoration:none;
-    color: #66ccff;
+    color: #66ccff;!important;
 }
 
 a.media:hover{

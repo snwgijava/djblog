@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericRelation
 from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
+from django.urls import reverse
+
 from read_views.models import ReadNum, ReadNumExpandMethod,ReadDetail
 
 
@@ -36,7 +38,7 @@ class Blog(models.Model,ReadNumExpandMethod):
     blog_tag = models.ManyToManyField(BlogTag,verbose_name='标签')
     read_details = GenericRelation(ReadDetail,verbose_name='阅读记录')
     created_time = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
-    last_update_time = models.DateTimeField(auto_now_add=True,verbose_name='修改时间')
+    last_update_time = models.DateTimeField(auto_now=True,verbose_name='修改时间')
 
     def __str__(self):
         return "<Blog:%s>" % self.title
@@ -45,6 +47,10 @@ class Blog(models.Model,ReadNumExpandMethod):
         verbose_name = '博客文章'
         verbose_name_plural = verbose_name
         # order = ['-created_time']
+
+
+    def get_absolute_url(self):
+        return reverse('blog:blog_detail', kwargs={'pk': self.pk})
 
 
 

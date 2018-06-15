@@ -13,3 +13,24 @@ class UserProfile(models.Model):
     class Meta:
         verbose_name = '用户信息'
         verbose_name_plural = verbose_name
+
+def get_nickname(self):
+    if UserProfile.objects.filter(user=self).exists():
+        userprofile = UserProfile.objects.get(user=self)
+        return userprofile.nickname
+    else:
+        return ''
+
+def get_nickname_or_username(self):
+    if UserProfile.objects.filter(user=self).exists():
+        userprofile = UserProfile.objects.get(user=self)
+        return userprofile.nickname
+    else:
+        return self.username
+
+def has_nickaname(self):
+    return UserProfile.objects.filter(user=self).exists()
+
+User.get_nickname = get_nickname
+User.has_nickname = has_nickaname
+User.get_nickname_or_username = get_nickname_or_username

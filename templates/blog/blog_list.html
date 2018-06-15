@@ -2,7 +2,7 @@
 {% load blog_tags %}
 {% load comment_tags %}
 
-{% block title %}个人博客|文章列表{% endblock %}
+{% block title %}杨剑Blog|文章列表{% endblock %}
 
 
 {% block nav_blog_active %}active{% endblock %}
@@ -15,38 +15,49 @@
             {% else %}
                 文章列表（共有{{ blogs.paginator.count }}篇文章）
             {% endif %}
+            {% if user.is_superuser %}
+                <a href="{% url 'blog:new_blog' %}" class="pull-right"><i class="fas fa-pen-square" style="font-size: 1.5em"></i></a>
+            {% endif %}
         </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
         <ul class="media-list">
             {% for blog in blogs.object_list %}
                 <article class="flex-left list-group-item post-item px-7">
                     <div class="unit unit-1-on-mobile">
-                        <h3 class="top-gap-0 post-item-title"><a class=".media-heading"
-                                                                 href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
+                        <h3 class="top-gap-0 post-item-title">
+                            <a class="media-heading" href="{% url 'blog:blog_detail' blog.pk %}">{{ blog.title }}</a>
+                            {% if user.is_superuser %}
+                            <a href="{% url 'blog:update_blog' blog.pk %}" style="font-size: 15px;"> <i class="far fa-edit"></i></a>
+                            {% endif %}
                         </h3>
                         <div class="media-body meta">
-                            <span class="fa fa-user" aria-hidden="true"></span> {{ blog.author }}
+                            <span class="fa fa-user"
+                                  aria-hidden="true"></span> {{ blog.author.get_nickname_or_username }}
                             <span> • </span>
-                            <a href="{% url 'blogs_with_type' blog.blog_type.pk %}">
+                            <a href="{% url 'blog:blogs_with_type' blog.blog_type.pk %}">
                                 <i class="fa fa-folder-open" aria-hidden="true"></i>
                                 {{ blog.blog_type }}
                             </a>
                             <span> • </span>
                             <i class="fa fa-eye"></i> {{ blog.get_read_num }}
                             <span> • </span>
-{#                            <span class="fa fa-comments"></span> {% get_comment_count blog %}#}
-{#                            <span> • </span>#}
-{#                            <i class="fa fa-tags" aria-hidden="true"></i>#}
-{#                            {% for tag in blog.blog_tag.all %}#}
-{#                                <a href="{% url 'blogs_with_tag' tag.pk %}">{{ tag.tag_name }}</a>#}
-{#                            {% endfor %}#}
-{#                            <span> • </span>#}
+                            <span class="fa fa-comments"></span> {% get_comment_count blog %}
+                            <span> • </span>
                             <span class="fa fa-calendar-alt"
                                   aria-hidden="true"></span> {{ blog.created_time | date:"Y-m-d H:i:s" }}
                         </div>
                     </div>
                 </article>
-                <div class="card-footer text-muted" style="background-color: #66CCFF;max-height: 2.5em">
-                    <p class="text-right"><a style="color: #FFFFFF;" href="{% url 'blog_detail' blog.pk %}">阅读文章</a></p>
+                <div class="card-footer text-muted" style="background-color: #66CCFF;max-height: 2.8em">
+{#              {{ blog.get_absolute_url }}          {% url 'blog_detail' blog.pk %}    #}
+                    <p class="text-right"><a style="color: #FFFFFF;" href="{% url 'blog:blog_detail' blog.pk %} ">阅读文章</a></p>
                 </div>
                 <br>
             {% endfor %}
@@ -63,7 +74,7 @@
             <hr>
             {% get_categories as blog_types %}
             {% for blog_type in blog_types %}
-                <a class="media" href="{% url 'blogs_with_type' blog_type.pk %}">
+                <a class="media" href="{% url 'blog:blogs_with_type' blog_type.pk %}">
                     <div class="media-body">
                         <span class="media-heading">{{ blog_type.type_name }}
                             ({{ blog_type.num_blog_types }})</span>
@@ -79,7 +90,7 @@
             <hr>
             {% archives as blog_dates %}
             {% for blog_date in blog_dates %}
-                <a class="media" href="{% url 'blogs_with_date' blog_date.year blog_date.month %}">
+                <a class="media" href="{% url 'blog:blogs_with_date' blog_date.year blog_date.month %}">
                     <div class="media-body">
                         <span class="media-heading">{{ blog_date.year }}年{{ blog_date.month }}月</span>
                     </div>
@@ -98,8 +109,8 @@
                 <div class="media-body">
                     {% for blog_tag in blog_tags %}
 
-                        <a href="{% url 'blogs_with_tag' blog_tag.pk %}" class="btn btn-outline-secondary btn-sm tag_a">{{ blog_tag.tag_name }}</a>
-
+                        <a href="{% url 'blog:blogs_with_tag' blog_tag.pk %}"
+                           class="btn btn-outline-secondary btn-sm tag_a">{{ blog_tag.tag_name }}</a>
                     {% empty %}
                         <p>暂无标签</p>
                     {% endfor %}

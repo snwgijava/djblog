@@ -7,12 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>{% block title %}个人博客{% endblock %}</title>
-    {% block head_css %}
-        <link href="{% static '/css/base.css' %}" rel="stylesheet">
+    <title>{% block title %}杨剑Blog{% endblock %}</title>
+<link href="{% static '/css/base.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/prism.css' %}">
+    {% block head_css %}
+
     {% endblock %}
 
 
@@ -20,7 +22,7 @@
 <body style="background-color: #f5f8fa">
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navbar-dark bg-dark col-offset-1">
     <a class="navbar-brand" href="{% url "home" %}">
-        杨剑的博客
+        杨剑Blog
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,20 +34,20 @@
                 <a class="nav-link" href="/">首页</a>
             </li>
             <li class="nav-item {% block nav_blog_active %}{% endblock %}">
-                <a class="nav-link" href="{% url 'blog_list' %}">文章列表</a>
+                <a class="nav-link" href="{% url 'blog:blog_list' %}">文章列表</a>
             </li>
         </ul>
-
-        <nav class="navbar navbar-dark bg-dark mx-auto">
-            <form class="form-inline" action="{% url 'search' %}" method="get">
+        <div class="col-center-block">
+            <form class="form-inline my-2 my-lg-0" action="{% url 'blog:search' %}" method="get">
                 <input class="form-control mr-sm-2" name="search" id="search" type="search" placeholder="请输入文章标题"
                        aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
-        </nav>
+        </div>
+
+
         <ul class="nav navbar-nav navbar-right">
             {% if not user.is_authenticated %}
-
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>
                 </li>
@@ -53,11 +55,10 @@
                     <a class="nav-link" href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>
                 </li>
             {% else %}
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown">
-                        {{ user.username }}
+                        {{ user.get_nickname_or_username }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'user_info' %}">个人资料</a>
@@ -85,32 +86,32 @@
 
     </div>
     <div id="up">
-        <i class="el-icon-caret-top" id="ifa"></i>
+        <i class="fas fa-caret-up"></i>
     </div>
 </div>
 
 
-<footer id="footer" class="fixed-bottom" style="background-color: #1ABC9C">
-    <div class="copyright">
-        <p class="text-center">欢迎来到我的博客 © 2018</p>
+<footer id="footer" style="background-color: #1ABC9C">
+    <div class="container">
+        <div class="copyright">
+            <p class="text-center">欢迎来到我的博客 © 2018</p>
+        </div>
+        <div class="copyright">
+            <p class="text-center"><span>博客总访问量：{% get_view_nums %}</span></p>
+        </div>
     </div>
-    <div class="copyright">
-        <p class="text-center"><span>博客总访问量：{% get_view_nums %}</span></p>
-    </div>
-
 </footer>
 </body>
 
-<script src="https://use.fontawesome.com/69523c2039.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+      integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-<!-- 引入样式 -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-<!-- 引入组件库 -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="{% static 'ckeditor/static/ckeditor/ckeditor/plugins/prism_patched.min.js' %}"></script>
+
 <script>
     $("#up").hide();         //刚进入页面时设置为隐藏
     $("#up").bind("click", function () {     //单击时返回顶部

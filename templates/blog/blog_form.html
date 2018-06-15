@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %}{{ blog_title }}{% endblock %}
+
+{% block content %}
+    <div class="col-sm-9 col-md-9">
+        <div class="list-title">
+            <h4>{{ blog_title }}</h4>
+        </div>
+        <article class="flex-left list-group-item post-item px-7">
+            <div class="unit unit-1-on-mobile">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <p class="text-right">
+                        <button class="btn btn-primary" type="submit" value="{{ blog_button }}">{{ blog_button }}</button>
+                    </p>
+                </form>
+            </div>
+        </article>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}

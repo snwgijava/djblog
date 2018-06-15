@@ -1,10 +1,17 @@
+from django.contrib.auth.models import User
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render,redirect
+from django.urls import reverse_lazy
 from pure_pagination import Paginator,PageNotAnInteger
+from django.views import View
+from django.views.generic.edit import UpdateView
+from django.contrib import messages
+
 
 
 from .models import Blog, BlogType, BlogTag
 from read_views.utls import read_views
+from .forms import NewBlogForm
 
 
 # Create your views here.
@@ -27,9 +34,9 @@ def blog_list(request):
     return render(request,'blog/blog_list.html', context)
 
 
-def blog_detail(request,blog_pk):
+def blog_detail(request,pk):
     context = {}
-    blog = get_object_or_404(Blog,pk=blog_pk)
+    blog = get_object_or_404(Blog,pk=pk)
     read_cookie_key = read_views(request,blog)
 
     context['blog'] = blog
@@ -71,7 +78,32 @@ def search(request):
     context['blogs'] = blog_pages(request, searchs)
     return render(request,'blog/blog_list.html',context)
 
+class NewBlogView(View):
+    def get(self,request):
+        form = NewBlogForm()
+        context = {}
+        context['blog_title']= '新的文章'
+        context['blog_button']= '发布'
+        context['form']= form
+        return render(request,'blog/blog_form.html',context)
 
+    def post(self,request):
+        author = Blog(author=request.user)
+        form = NewBlogForm(request.POST,instance=author)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request,messages.SUCCESS,'文章发布成功')
+            return redirect('blog_list')
 
+class UpdateBlogView(UpdateView):
+    model = Blog
+    fields = ['title','content','blog_type','blog_tag']
+    template_name = 'blog/blog_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['blog_title'] = '修改文章'
+        context['blog_button'] = '修改'
+        return context
 
 

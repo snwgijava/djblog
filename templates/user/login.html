@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 
 {% block title %}用户登录{% endblock %}
+{% block head_css %}
+    <style type="text/css">
+        .captcha {
+            position: absolute;
+            z-index: 1;
+            top: 68.5%;
+            left: 86%;
+            width: 81px;
+            height: 38px;
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
     <div class="col-sm-8 col-md-8">
@@ -9,13 +22,19 @@
             <div class="card-body">
                 <form action="" method="post">
                     {% csrf_token %}
-                    {% for field in login_form %}
-                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                        {{ field }}
-                        <p class="text-danger">{{ field.errors.as_text }}</p>
-                    {% endfor %}
+
+                    {% bootstrap_form login_form %}
+
+                    {#                    {% for field in login_form %}#}
+                    {#                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>#}
+                    {#                        {{ field }}#}
+                    {#                        <p class="text-danger">{{ field.errors.as_text }}</p>#}
+                    {#                    {% endfor %}#}
+
                     <span class="pull-left text-danger">{{ login_form.non_field_errors }}</span>
-                    <p class="text-right"><button class="btn btn-primary" type="submit" value="登陆">登陆</button></p>
+                    <p class="text-right">
+                        <button class="btn btn-primary" type="submit" value="登陆">登陆</button>
+                    </p>
                 </form>
             </div>
         </div>

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'likes',
     'user',
     'captcha',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -163,24 +164,33 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 #配置ckeditoer上传图片功能
 CKEDITOR_UPLOAD_PATH = 'upload/'
+#上传图片出现问题时的配置
+X_FRAME_OPTIONS ='SAMEORIGIN'
 #评论ckeditoer配置
 CKEDITOR_CONFIGS = {
     'default':{
-
-    },
-    'comment_ckeditor': {
         'toolbar': 'custom',
         'toolbar_custom': [
             ['Bold', 'Italic', 'Underline','Strike','Subscript','Superscript'],
             ['TextColor','BGColor','RemoveFormat'],
             ['NumberedList', 'BulletedList'],
             ['Link', 'Unlink'],
-            ['Smiley', 'SpecialChar','Blockquote'],
+            ['Smiley', 'SpecialChar','Blockquote','CodeSnippet']
         ],
+        # 插件
+        'extraPlugins': ','.join(['codesnippet','uploadimage','widget','lineutils',]),
         'height': 180,
-        'width': 'auto',
+        'width': 'auto%',
         'tabSpaces':4,
         'removePlugins':'elementspath',
         'resize_enabled':False,
-    },
+    }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = '809127232@qq.com'
+EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD  #授权码
+EMAIL_SUBJECT_PREFIX = '杨剑的博客'
+EMAIL_USE_TLS = True #与SMTP服务器通信时，是否启动TLS链接(安全链接)

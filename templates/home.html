@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}个人博客|首页{% endblock %}
+{% block title %}杨剑Blog|首页{% endblock %}
 
 {% block nav_home_active %}active{% endblock %}
 
@@ -17,7 +17,7 @@
             <div class="text-center tag_title">今天热门文章</div>
             <hr>
             {% for hot_date in today_hot_date %}
-                <a class="media" href="{% url 'blog_detail' hot_date.content_object.pk %}">
+                <a class="media" href="{% url 'blog:blog_detail' hot_date.content_object.pk %}">
                     <div class="media-body">
                         <span class="media-heading">{{ hot_date.content_object.title }}
                         </span>
@@ -32,7 +32,7 @@
             <div class="text-center tag_title">七天热门文章</div>
             <hr>
             {% for hot_blog in hot_data_for_7_days %}
-                <a class="media" href="{% url 'blog_detail' hot_blog.id %}">
+                <a class="media" href="{% url 'blog:blog_detail' hot_blog.id %}">
                     <div class="media-body">
                         <span class="media-heading">{{ hot_blog.title }}
                         </span>

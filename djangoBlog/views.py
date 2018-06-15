@@ -93,7 +93,7 @@ class NewBlogView(View):
         if form.is_valid():
             form.save()
             messages.add_message(request,messages.SUCCESS,'文章发布成功')
-            return redirect('blog_list')
+            return redirect('blog:blog_list')
 
 class UpdateBlogView(UpdateView):
     model = Blog

@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a72557c-d332-4be6-9292-36cdddbbca2f" name="Default" comment="添加">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/blog/settings.py" afterPath="$PROJECT_DIR$/blog/settings.py" />
-      <change beforePath="$PROJECT_DIR$/media/upload/2018/06/13/qq20180613145823.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/css/base.css" afterPath="$PROJECT_DIR$/static/css/base.css" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
+      <change beforePath="$PROJECT_DIR$/djangoBlog/views.py" afterPath="$PROJECT_DIR$/djangoBlog/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,11 +42,21 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/djangoBlog/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="102" column="31" lean-forward="false" selection-start-line="102" selection-start-column="31" selection-end-line="102" selection-end-column="31" />
+            <state relative-caret-position="201">
+              <caret line="100" column="40" lean-forward="true" selection-start-line="100" selection-start-column="40" selection-end-line="100" selection-end-column="40" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/blog/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="151" column="3" lean-forward="false" selection-start-line="151" selection-start-column="3" selection-end-line="153" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -66,31 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blog/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="155" column="20" lean-forward="true" selection-start-line="155" selection-start-column="20" selection-end-line="155" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="config.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/static/css/base.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="182" column="7" lean-forward="true" selection-start-line="182" selection-start-column="7" selection-end-line="182" selection-end-column="7" />
+            <state relative-caret-position="161">
+              <caret line="7" column="18" lean-forward="true" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -100,7 +87,7 @@
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="368">
-              <caret line="102" column="9" lean-forward="true" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
+              <caret line="102" column="9" lean-forward="false" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -194,7 +181,6 @@
         <option value="$PROJECT_DIR$/user/models.py" />
         <option value="$PROJECT_DIR$/comment/views.py" />
         <option value="$PROJECT_DIR$/templates/user/ss.html" />
-        <option value="$PROJECT_DIR$/blog/config.py" />
         <option value="$PROJECT_DIR$/user/urls.py" />
         <option value="$PROJECT_DIR$/templates/user/user_info.html" />
         <option value="$PROJECT_DIR$/templates/user/bind_email.html" />
@@ -212,12 +198,13 @@
         <option value="$PROJECT_DIR$/djangoBlog/urls.py" />
         <option value="$PROJECT_DIR$/templates/blog/update_blog.html" />
         <option value="$PROJECT_DIR$/templates/blog/blog_form.html" />
-        <option value="$PROJECT_DIR$/djangoBlog/views.py" />
         <option value="$PROJECT_DIR$/djangoBlog/models.py" />
         <option value="$PROJECT_DIR$/templates/blog/blog_detail.html" />
         <option value="$PROJECT_DIR$/templates/base.html" />
-        <option value="$PROJECT_DIR$/blog/settings.py" />
         <option value="$PROJECT_DIR$/static/css/base.css" />
+        <option value="$PROJECT_DIR$/blog/config.py" />
+        <option value="$PROJECT_DIR$/djangoBlog/views.py" />
+        <option value="$PROJECT_DIR$/blog/settings.py" />
       </list>
     </option>
   </component>
@@ -252,6 +239,11 @@
           <expand>
             <path>
               <item name="blog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blog" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blog" type="462c0819:PsiDirectoryNode" />
               <item name="blog" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -937,16 +929,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/djangoBlog/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="102" column="31" lean-forward="false" selection-start-line="102" selection-start-column="31" selection-end-line="102" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/blog/blog_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -965,16 +947,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/blog/blog_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="140" column="57" lean-forward="false" selection-start-line="140" selection-start-column="57" selection-end-line="140" selection-end-column="57" />
-          <folding>
-            <element signature="e#2049#2071#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/media/upload/2018/06/13/qq20180613145823.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -988,26 +960,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
-          <caret line="102" column="9" lean-forward="true" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blog/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="155" column="20" lean-forward="true" selection-start-line="155" selection-start-column="20" selection-end-line="155" selection-end-column="20" />
+          <caret line="102" column="9" lean-forward="false" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1015,7 +971,43 @@
     <entry file="file://$PROJECT_DIR$/static/css/base.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
-          <caret line="182" column="7" lean-forward="true" selection-start-line="182" selection-start-column="7" selection-end-line="182" selection-end-column="7" />
+          <caret line="182" column="7" lean-forward="false" selection-start-line="182" selection-start-column="7" selection-end-line="182" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="18" lean-forward="true" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/blog/blog_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="140" column="57" lean-forward="false" selection-start-line="140" selection-start-column="57" selection-end-line="140" selection-end-column="57" />
+          <folding>
+            <element signature="e#2049#2071#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/djangoBlog/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="100" column="40" lean-forward="true" selection-start-line="100" selection-start-column="40" selection-end-line="100" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="151" column="3" lean-forward="false" selection-start-line="151" selection-start-column="3" selection-end-line="153" selection-end-column="3" />
           <folding />
         </state>
       </provider>

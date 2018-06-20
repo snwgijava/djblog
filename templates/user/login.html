@@ -20,7 +20,7 @@
         <div class="card">
             <h4 class="card-header">登录</h4>
             <div class="card-body">
-                <form action="" method="post">
+                <form action="" method="post" id="login_form">
                     {% csrf_token %}
 
                     {% bootstrap_form login_form %}
@@ -39,7 +39,6 @@
             </div>
         </div>
     </div>
-
 
 {% endblock %}
 

@@ -8,6 +8,8 @@
 
 
 {% block content %}
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 
     <div class="col-sm-8 col-md-8">
         <div class="panel-body">
@@ -32,7 +34,7 @@
                     </div>
                 </div>
                 <div class="blog-detail-content">
-                <p class="content-last-time">- - 修改时间：{{ blog.last_update_time | date:"Y-m-d H:i:s" }} - -</p>
+                    <p class="content-last-time">- - 修改时间：{{ blog.last_update_time | date:"Y-m-d H:i:s" }} - -</p>
                     {% autoescape off %}
                         {{ blog.content | safe }}
                     {% endautoescape %}
@@ -110,13 +112,14 @@
                             <div id="comment_{{ comment.pk }}" class="comment-text">
                                 {{ comment.text | safe }}
                             </div>
-                            <div class="like"
-                                 onclick="likeChange(this,'{% get_content_type comment %}',{{ comment.pk }})">
-                                <i class="far fa-thumbs-up {% get_like_status comment %}" aria-hidden="true"></i>
-                                <span class="like-num">{% get_like_count comment %}</span>
-                            </div>
-                            <a href="javascript:reply({{ comment.pk }})" class="pull-right">回复</a>
-                            <span class="pull-right">{{ comment.comment_time | date:"Y-m-d H:i:s" }}&nbsp;&nbsp;</span>
+                                <div class="like"
+                                     onclick="likeChange(this,'{% get_content_type comment %}',{{ comment.pk }})">
+                                    <i class="far fa-thumbs-up {% get_like_status comment %}" aria-hidden="true"></i>
+                                    <span class="like-num">{% get_like_count comment %}</span>
+                                </div>
+
+                                    <a href="javascript:reply({{ comment.pk }})" class="pull-right">回复</a>
+                                    <span class="pull-right">{{ comment.comment_time | date:"Y-m-d H:i:s" }}&nbsp;&nbsp;</span>
 
                             {% for reply in comment.root_comment.all %}
                                 <div class="reply">
@@ -176,8 +179,7 @@
 {% endblock %}
 
 {% block js %}
-    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
     <script>
         String.prototype.format = function () {
             var str = this;

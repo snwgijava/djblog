@@ -171,6 +171,23 @@ CKEDITOR_CONFIGS = {
             ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
             ['TextColor', 'BGColor', 'RemoveFormat'],
             ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink', 'Image'],
+            ['Smiley', 'SpecialChar', 'Blockquote', 'CodeSnippet']
+        ],
+        # 插件
+        'extraPlugins': ','.join(['codesnippet', 'uploadimage', 'widget', 'lineutils', ]),
+        'height': 180,
+        'width': 'auto',
+        'tabSpaces': 4,
+        'removePlugins': 'elementspath',
+        'resize_enabled': False,
+    },
+    'comment_ckeditor': {
+        'toolbar': 'custom',
+        'toolbar_custom': [
+            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+            ['TextColor', 'BGColor', 'RemoveFormat'],
+            ['NumberedList', 'BulletedList'],
             ['Link', 'Unlink'],
             ['Smiley', 'SpecialChar', 'Blockquote', 'CodeSnippet']
         ],

@@ -149,9 +149,9 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'static')
+#]
 
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
@@ -163,6 +163,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_UPLOAD_PATH = 'upload/'
 # 上传图片出现问题时的配置
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+
 # 评论ckeditoer配置
 CKEDITOR_CONFIGS = {
     'default': {

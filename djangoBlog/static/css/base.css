@@ -4,12 +4,11 @@
 }
 
 body {
-    margin-top: 80px !important;
+    margin-top: 80px;
 }
 
 div.row {
     padding-bottom: 5%;
-!important;
 }
 
 h3.home-content {

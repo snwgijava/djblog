@@ -2,9 +2,14 @@
     padding: 0;
     margin: 0;
 }
+html {
+  position: relative;
+  min-height: 100%;
+}
 
 body {
     margin-top: 80px;
+    margin-bottom: 60px;
 }
 
 div.row {

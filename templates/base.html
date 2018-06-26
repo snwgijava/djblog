@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/prism.css' %}">
     <link href="{% static '/css/base.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/prism.css' %}">
     {% block head_css %}
 
     {% endblock %}
@@ -87,32 +87,34 @@
         {% endblock %}
 
     </div>
-    <div id="up">
+    <div id="up-top">
         <i class="fas fa-caret-up"></i>
     </div>
 </div>
 
 
-<footer id="footer" style="background-color: #1ABC9C" class="fixed-bottom">
-    <div class="container">
-        <div class="copyright">
-            <p class="text-center">欢迎来到我的博客 © 2018</p>
-        </div>
-        <div class="copyright">
-            <p class="text-center"><span>博客总访问量：{% get_view_nums %}</span></p>
-        </div>
+<footer id="footer" style="background-color: #1ABC9C;margin-bottom: 0" class="text-center">
+    <div class="copyright">
+        <p class="text-center"><span>博客总访问量：{% get_view_nums %}</span></p>
+    </div>
+    <div class="copyright">
+        <p class="text-center" style="font-size: 13px"><a href="http://www.miitbeian.gov.cn" style="color: white">蜀ICP备17019633号</a>
+        </p>
     </div>
 </footer>
+
+
 </body>
 
 
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/blog.js' %}"/>
 <script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-<script src="{% static 'js/base.js' %}"/>
-<script src="{% static 'ckeditor/static/ckeditor/ckeditor/plugins/prism_patched.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'ckeditor/static/ckeditor/ckeditor/plugins/prism_patched.min.js' %}"/>
 
 
 {% block js %}

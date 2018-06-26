@@ -5,10 +5,11 @@
 
 body {
     margin-top: 80px !important;
-    padding-bottom: 60px;
 }
-div.row{
-    padding-bottom: 5%;!important;
+
+div.row {
+    padding-bottom: 5%;
+!important;
 }
 
 h3.home-content {
@@ -33,7 +34,6 @@ div.blog-detail-up-down {
     color: red;
 }
 
-
 hr {
     margin-top: 12px;
     margin-bottom: 12px;
@@ -52,8 +52,6 @@ hr {
     margin-top: 0px;
 }
 
-
-
 .active-users a.media {
     color: #797878;
     line-height: 26px;
@@ -71,7 +69,6 @@ a {
     color: #797878;
     text-decoration: none;
 }
-
 
 .meta, .meta > a {
     font-size: 0.9em;
@@ -109,43 +106,43 @@ div.viewsDOM {
     display: inline;
 }
 
-.list-title{
+.list-title {
     background-color: white;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid rgba(0, 0, 0, .125);
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
     padding: 0.5em 1.5em;
 }
 
-div.comment-area{
+div.comment-area {
     margin-top: 2em;
 
 }
 
-h3.comment-area-title{
+h3.comment-area-title {
     border-bottom: 1px solid #ccc;
     padding-bottom: 0.4em;
 }
 
-div.django-ckeditor-widget{
+div.django-ckeditor-widget {
     width: 100%;
 }
 
-div.comment{
+div.comment {
     border-bottom: 1px dashed #ccc;
     /*margin-bottom: 0.5em;*/
     padding-bottom: 0.5em;
     padding-top: 0.5em;
 }
 
-div.reply{
+div.reply {
     margin-left: 2em;
     background-color: #E4E7ED;
     padding: 0em 0.5em;
     border-bottom: 1px dashed #ccc;
 }
 
-#reply_content_container{
+#reply_content_container {
     display: none;
     border: 1px solid #e0e0e0;
     border-bottom: none;
@@ -154,33 +151,31 @@ div.reply{
     padding: 1em 1em 0.5em;
 }
 
-#reply_title{
+#reply_title {
     border-bottom: 1px solid #ccc;
     padding-bottom: 0.5em;
 }
 
-.tag_a{
+.tag_a {
     margin: 2px 2px;
 }
 
-div.like{
+div.like {
     margin-bottom: 1em;
-    cursor:pointer;
-    display:inline-block;
+    cursor: pointer;
+    display: inline-block;
     padding: 0.5em 0.3em;
 }
 
-div.like .active{
+div.like .active {
     color: red;
 }
 
-
-
-ul.navbar-right{
+ul.navbar-right {
     margin-right: 0px;
 }
 
-div#up{
+div#up-top {
     top: 85%;
     left: 96%;
     background-color: #fff;
@@ -192,10 +187,11 @@ div#up{
     border-radius: 20px;
     cursor: pointer;
     transition: .3s;
-    box-shadow: 0 0 6px rgba(0,0,0,.12);
+    box-shadow: 0 0 6px rgba(0, 0, 0, .12);
     z-index: 5;
 }
-div#up i{
+
+div#up-top i {
     color: #409eff;
     display: block;
     line-height: 40px;
@@ -203,55 +199,57 @@ div#up i{
     font-size: 18px;
 }
 
-div.copyright{
+div.copyright {
     margin-bottom: -1%;
 }
 
-#comment_list{
+#comment_list {
     padding: 0% 2%;
 }
 
-
-div.reply > div > p{
+div.reply > div > p {
     margin-left: 2em;
     margin-top: 0.5em;
 }
 
-a.blog-tags-a,a.page-a{
+a.blog-tags-a, a.page-a {
     color: #797878;
     font-size: 0.9em;
 }
 
-.content-last-time{
-    color: #797878;!important;
-    font-size: 0.8em;!important;
+.content-last-time {
+    color: #797878;
+!important;
+    font-size: 0.8em;
+!important;
 }
 
-a.blog-tags-a:hover{
-    text-decoration:none;
-    color: #66ccff;!important;
-}
-
-a.media:hover{
-    text-decoration:none;
+a.blog-tags-a:hover {
+    text-decoration: none;
     color: #66ccff;
+!important;
 }
 
-a.page-a:hover{
-    text-decoration:none;
-    color: #66ccff;
-}
-
-.post-item-title > a{
-     color: #797878;
-}
-
-.post-item-title > a:hover{
+a.media:hover {
     text-decoration: none;
     color: #66ccff;
 }
 
-div.comment-text{
+a.page-a:hover {
+    text-decoration: none;
+    color: #66ccff;
+}
+
+.post-item-title > a {
+    color: #797878;
+}
+
+.post-item-title > a:hover {
+    text-decoration: none;
+    color: #66ccff;
+}
+
+div.comment-text {
     margin-left: 1.5em;
     margin-top: 1em;
 }
@@ -263,8 +261,12 @@ div.comment-text{
     margin-right: auto;
 }
 
-.like{
+.like {
     display: inline-block;
+}
+
+#footer{
+    padding: 0.35em;
 }
 
 

@@ -19,7 +19,7 @@
             {% for hot_date in today_hot_date %}
                 <a class="media" href="{% url 'blog:blog_detail' hot_date.content_object.pk %}">
                     <div class="media-body">
-                        <span class="media-heading">{{ hot_date.content_object.title }}
+                        <span class="media-heading">{{ hot_date.content_object.title | truncatechars:25 }}
                         </span>
                     </div>
                 </a>
@@ -34,7 +34,7 @@
             {% for hot_blog in hot_data_for_7_days %}
                 <a class="media" href="{% url 'blog:blog_detail' hot_blog.id %}">
                     <div class="media-body">
-                        <span class="media-heading">{{ hot_blog.title }}
+                        <span class="media-heading">{{ hot_blog.title | truncatechars:25 }}
                         </span>
                     </div>
                 </a>

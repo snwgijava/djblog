@@ -12,6 +12,7 @@
             width: 81px;
             height: 38px;
         }
+
     </style>
 {% endblock %}
 
@@ -25,13 +26,13 @@
 
                     {% bootstrap_form login_form %}
 
-                    {#                    {% for field in login_form %}#}
-                    {#                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>#}
-                    {#                        {{ field }}#}
-                    {#                        <p class="text-danger">{{ field.errors.as_text }}</p>#}
-                    {#                    {% endfor %}#}
-
-                    <span class="pull-left text-danger">{{ login_form.non_field_errors }}</span>
+                    {#                                        {% for field in login_form %}#}
+                    {#                                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>#}
+                    {#                                            {{ field }}#}
+                    {#                                            <p class="text-danger">{{ field.errors.as_text }}</p>#}
+                    {#                                        {% endfor %}#}
+                    {##}
+                    {#                                        <span class="pull-left text-danger">{{ login_form.non_field_errors }}</span>#}
                     <p class="text-right">
                         <button class="btn btn-primary" type="submit" value="登陆">登陆</button>
                     </p>

@@ -135,7 +135,7 @@ def send_verifcation_code(request):
         code = ''.join(random.sample(string.ascii_letters + string.digits,4))
         #发送邮件间隔30秒
         now = int(time.time())
-        send_code_time = request.session.get('send_code_time','0')
+        send_code_time = int(request.session.get('send_code_time','0'))
         if now - send_code_time < 30:
             data['status'] = 'ERROR'
         else:

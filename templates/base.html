@@ -15,6 +15,7 @@
           crossorigin="anonymous">
     <link href="{% static '/css/base.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/prism.css' %}">
+
     {% block head_css %}
 
     {% endblock %}
@@ -58,9 +59,11 @@
                 </li>
             {% else %}
                 <li class="nav-item dropdown">
+
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown">
-                        {{ user.get_nickname_or_username }}
+                        <img src="{{ user.userprofile.image.url }}" class="rounded" alt="Cinque Terre" height="25px">
+                        &nbsp;&nbsp;{{ user.get_nickname_or_username }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'user_info' %}">个人资料</a>
@@ -106,7 +109,7 @@
 
 </body>
 
-<script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<script src="https://cdn.hcharts.cn/highcharts/highcharts.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="{% static 'js/blog.js' %}"/>
 <script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js" type="text/javascript"></script>
@@ -115,36 +118,36 @@
         crossorigin="anonymous"></script>
 
 <script>
-        // 图表配置
-        var options = {
-            chart: {
-                type: 'line'                          //指定图表的类型，默认是折线图（line）
-            },
+    // 图表配置
+    var options = {
+        chart: {
+            type: 'line'                          //指定图表的类型，默认是折线图（line）
+        },
+        title: {
+            text: '最近一周访问量'                 // 标题
+        },
+        xAxis: {
+            categories: {{ dates | safe }},   // x 轴分类
+            tickmarkPlacement: 'on'
+        },
+        yAxis: {
             title: {
-                text: '最近一周访问量'                 // 标题
+                text: null                // y 轴标题
             },
-            xAxis: {
-                categories: {{ dates | safe }},   // x 轴分类
-                tickmarkPlacement: 'on'
-            },
-            yAxis: {
-                title: {
-                    text: null                // y 轴标题
-                },
-                labels: {enabled: false},
-                gridLineDashStyle: 'Dash',
-            },
-            series: [{                              // 数据列
-                name: '访问量',                        // 数据列名
-                data: {{ read_nums }}                     // 数据
-            }],
+            labels: {enabled: false},
+            gridLineDashStyle: 'Dash',
+        },
+        series: [{                              // 数据列
+            name: '访问量',                        // 数据列名
+            data: {{ read_nums }}                     // 数据
+        }],
 
-            legend: {enabled: false},
-            credits: {enabled: false},
-        };
-        // 图表初始化函数
-        var chart = Highcharts.chart('container', options);
-    </script>
+        legend: {enabled: false},
+        credits: {enabled: false},
+    };
+    // 图表初始化函数
+    var chart = Highcharts.chart('container', options);
+</script>
 
 <script type="text/javascript" src="{% static 'ckeditor/static/ckeditor/ckeditor/plugins/prism_patched.min.js' %}"/>
 

@@ -6,20 +6,31 @@
 
 {% block content %}
     <div class="col-sm-9 col-md-9">
-    {% if user.is_authenticated %}
-        <h2>{{ user.username }}</h2>
-        <ul>
-            <div>昵称：{{ user.get_nickname }}<a href="{% url 'change_nickname' %}?form={{ request.get_full_path }}">修改昵称</a></div>
-            <div>邮箱:{% if user.email %}{{ user.email }}<a href="{% url 'bind_email' %}?form={{ request.get_full_path }}">修改邮箱</a>
-            {% else %}未绑定<a href="{% url 'bind_email' %}?form={{ request.get_full_path }}">绑定邮箱</a>{% endif %}</div>
-            <div>上次登录时间:{{ user.last_login }}</div>
-            <div><a href="#">修改密码</a></div>
-        </ul>
-    {% else %}
-        <span>未登录，跳转到首页</span>
-        <script>
-            window.location.href='/'
-        </script>
-    {% endif %}
+        {% if user.is_authenticated %}
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <img src="{{ user.userprofile.image.url }}" class="rounded" alt="Cinque Terre">
+                    </div>
+                    <div>
+                        <h4 class="card-title">{{ user.username }}</h4>
+                        <p class="card-text">昵称：{{ user.get_nickname }} <a
+                                href="{% url 'change_nickname' %}?form={{ request.get_full_path }}">修改昵称</a></p>
+                        <p class="card-text">邮箱:{% if user.email %}{{ user.email }}
+                            <a href="{% url 'bind_email' %}?form={{ request.get_full_path }}">修改邮箱</a>{% else %}  未绑定
+                            <a href="{% url 'bind_email' %}?form={{ request.get_full_path }}">绑定邮箱</a>{% endif %}</p>
+                        <p class="card-text">上次登录时间:{{ user.last_login }}</p>
+                        <a href="#" class="card-link">修改密码</a>
+                    </div>
+
+                </div>
+            </div>
+        {% else %}
+            <span>未登录，跳转到首页</span>
+            <script>
+                window.location.href = '/'
+            </script>
+        {% endif %}
     </div>
 {% endblock %}
+

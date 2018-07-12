@@ -133,7 +133,7 @@ div.django-ckeditor-widget {
 }
 
 div.comment {
-    border-bottom: 1px dashed #ccc;
+    /*border-bottom: 1px dashed #ccc;*/
     /*margin-bottom: 0.5em;*/
     padding-bottom: 0.5em;
     padding-top: 0.5em;
@@ -141,14 +141,12 @@ div.comment {
 
 div.reply {
     margin-left: 2em;
-    background-color: #E4E7ED;
     padding: 0em 0.5em;
-    border-bottom: 1px dashed #ccc;
 }
 
 #reply_content_container {
     display: none;
-    border: 1px solid #e0e0e0;
+    /*border: 1px solid #e0e0e0;*/
     border-bottom: none;
     background-color: white;
     overflow: hidden;
@@ -254,7 +252,7 @@ a.page-a:hover {
 }
 
 div.comment-text {
-    margin-left: 1.5em;
+    margin-left: 0.5em;
     margin-top: 1em;
 }
 

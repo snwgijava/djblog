@@ -48,9 +48,13 @@ def update_commnet(request):
         #返回json数据
         data['status'] = 'SUCCESS'
         data['username'] = comment.user.get_nickname_or_username()
+        #评论用户的头像
+        data['comment_user_image'] = comment.user.userprofile.image.url
         data['comment_time'] = comment.comment_time.timestamp()
         data['text'] = comment.text
         data['content_type'] = ContentType.objects.get_for_model(comment).model
+        #回复用户的头像
+        data['reply_user_image'] = comment.reply_to.userprofile.image.url
         if not parent is None:
             data['reply_to'] = comment.reply_to.get_nickname_or_username()
         else:

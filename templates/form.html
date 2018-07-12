@@ -17,13 +17,14 @@
                         <p class="text-danger">{{ field.errors.as_text }}</p>
                     {% endfor %}
                     <span id="tip" class="pull-left text-danger">{{ form.non_field_errors }}</span>
-                <div class="clearfix"></div>
-                <div class="pull-left">
-                    {% block other_buttons %}{% endblock %}
-                </div>
-                    <div class="pull-right">
-                        <button class="btn btn-primary " type="submit" value="{{ submit_text }}">{{ submit_text }}</button>
-                        <button class="btn btn-default" onclick="window.location.href='{{ return_back_url }}'">返回</button>
+                    <div class="clearfix"></div>
+                    <div class="text-right">
+                        {% block other_buttons %}{% endblock %}
+                        <button class="btn btn-primary " type="submit"
+                                value="{{ submit_text }}">{{ submit_text }}</button>
+                        <button class="btn btn-default" onclick="window.location.href='{{ return_back_url }}'">返回
+                        </button>
+
                     </div>
                 </form>
             </div>

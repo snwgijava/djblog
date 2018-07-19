@@ -18,6 +18,7 @@
 {% block content %}
     <div class="col-sm-8 col-md-8">
         <div class="card">
+            {% if not user.is_authenticated %}
             <h4 class="card-header">注册</h4>
             <div class="card-body">
                 <form action="" method="post" id="register_form">
@@ -35,6 +36,15 @@
                     </p>
                 </form>
             </div>
+            {% else %}
+                <span>已登录，正在跳转到首页...</span>
+                <script>
+                    function skipHome() {
+                        window.location.href = '/';
+                    }
+                    window.setTimeout("skipHome()",2000)
+                </script>
+            {% endif %}
         </div>
     </div>
 

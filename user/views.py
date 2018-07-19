@@ -46,6 +46,8 @@ def login_model_form(request):
         data['status'] = 'ERROR'
     return JsonResponse(data)
 
+
+
 def register(request):
     if request.method == 'POST':
         register_form = RegForm(request.POST)

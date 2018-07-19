@@ -13,14 +13,22 @@
             word-wrap: break-word;
             word-break: break-all;
         }
-        .comment img{
+
+        .comment img {
             width: 72px;
             height: 72px;
-            border-radius:0.3em;
+            border-radius: 0.3em;
         }
-        .reply img{
+
+        .reply img {
             width: 48px;
             height: 48px;
+        }
+
+        .media img {
+            width: 72px;
+            height: 72px;
+            border-radius: 0.3em;
         }
     </style>
     <div class="col-sm-8 col-md-8">
@@ -121,7 +129,7 @@
                     {% for comment in comments %}
 
                         <div class="comment" id="root_{{ comment.pk }}">
-                        <hr style="border-color:#bcbcbc">
+                            <hr style="border-color:#bcbcbc">
                             <div class="media">
                                 <img src="{{ comment.user.userprofile.image.url }}" class="align-self-start mr-3">
                                 <div class="media-body">
@@ -143,7 +151,7 @@
                             </div>
                             {% for reply in comment.root_comment.all %}
                                 <div class="reply">
-                                <hr style="border-color:#bcbcbc">
+                                    <hr style="border-color:#bcbcbc">
                                     <div class="media">
                                         <img src="{{ reply.user.userprofile.image.url }}" class="align-self-start mr-3">
                                         <div class="media-body">
@@ -241,7 +249,7 @@
                             //插入数据
                             if ($('#reply_comment_id').val() == '0') {
                                 //插入评论
-                                var comment_html = '<div class="media">\n' +
+                                var comment_html = '<br><hr style="border-color:#bcbcbc"><div class="media">\n' +
                                     '<img src="{5}" class="align-self-start mr-3">\n' +
                                     '<div class="media-body"><label>{1}:</label>\n' +
                                     '<div id="comment_{0}" class="comment-text">{3}</div></div></div>\n' +
@@ -257,18 +265,19 @@
                                 $("#comment_list").prepend(comment_html);
                             } else {
                                 //插入回复
-                                var reply_html = '<div class="reply "><div class="media">\n' +
+
+                                var reply_html = '<div class="reply"><div class="media">\n' +
                                     '<img src="{6}" class="align-self-start mr-3"><div class="media-body"><span>{1}</span>\n' +
                                     '&nbsp;回复&nbsp;\n' +
-                                    '<span>{3}:</span><div id="comment_{0}" class="comment-text">{4}</div></div>\n' +
-                                    '<div class="text-right"><div class="like"onclick="likeChange(this,\'{5}\',{0})">\n' +
-                                    '<i class="far fa-thumbs-up" aria-hidden="true"></i> \n' +
+                                    '<span>{3}:</span><div id="comment_{0}" class="comment-text">{4}</div></div></div>\n' +
+                                    ' <div class="text-right"><div class="like"onclick="likeChange(this,\'{5}\',{0})">\n' +
+                                    '<i class="far fa-thumbs-up"aria-hidden="true"></i>\n' +
                                     '<span class="like-num">0</span></div>\n' +
-                                    '<a href="javascript:reply({0})" class="pull-right">回复</a>' +
-                                    '<span class="pull-right">{2}</span></div></div>';
+                                    '<a href="javascript:reply({0})" class="pull-right">回复</a>\n' +
+                                    '<span class="pull-right">{2}&nbsp;&nbsp;</span></div>';
 
                                 reply_html = reply_html.format(data['pk'], data['username'], timeFormat(data['comment_time']),
-                                    data['reply_to'], data['text'], data['content_type'],data['reply_user_image']);
+                                    data['reply_to'], data['text'], data['content_type'], data['reply_user_image']);
                                 $("#root_" + data['root_pk']).append(reply_html);
                             }
 

@@ -9,6 +9,8 @@ from django.contrib import messages
 
 
 
+
+
 from .models import Blog, BlogType, BlogTag
 from read_views.utls import read_views
 from .forms import NewBlogForm

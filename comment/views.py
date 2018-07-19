@@ -54,7 +54,7 @@ def update_commnet(request):
         data['text'] = comment.text
         data['content_type'] = ContentType.objects.get_for_model(comment).model
         #回复用户的头像
-        data['reply_user_image'] = comment.reply_to.userprofile.image.url
+        data['reply_user_image'] = comment.user.userprofile.image.url
         if not parent is None:
             data['reply_to'] = comment.reply_to.get_nickname_or_username()
         else:

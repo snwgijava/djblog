@@ -164,6 +164,12 @@ CKEDITOR_UPLOAD_PATH = 'upload/'
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 CKEDITOR_IMAGE_BACKEND = 'pillow'
 
+# 是否所有的HTTP请求都必须被重定向到HTTPS
+# SECURE_SSL_REDIRECT = True
+# 是否建立加密cookie防止CSRF攻击
+CSRF_COOKIE_SECURE = True
+
+
 # 评论ckeditoer配置
 CKEDITOR_CONFIGS = {
     'default': {

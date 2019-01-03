@@ -84,8 +84,8 @@ class NewBlogView(View):
     def get(self,request):
         form = NewBlogForm()
         context = {}
-        context['blog_title']= '新的文章'
-        context['blog_button']= '发布'
+        context['title']= '新的文章'
+        context['button']= '发布'
         context['form']= form
         return render(request,'blog/blog_form.html',context)
 
@@ -104,8 +104,8 @@ class UpdateBlogView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['blog_title'] = '修改文章'
-        context['blog_button'] = '修改'
+        context['title'] = '修改文章'
+        context['button'] = '修改'
         return context
 
 

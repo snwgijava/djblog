@@ -10,3 +10,5 @@ class NewBlogForm(ModelForm):
         model = Blog
         fields = ['title','content','blog_type','blog_tag']
 
+
+

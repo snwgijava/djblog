@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from captcha.fields import CaptchaField
 from django.core.exceptions import ValidationError
 
+from .models import UserProfile
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='用户名', required=True,
@@ -59,6 +60,10 @@ class RegForm(forms.Form):
 class ChangeNickNameForm(forms.Form):
     nickname_new = forms.CharField(label='新的昵称', max_length=20,
                                    widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '请输入新的昵称'}))
+    password = forms.CharField(label='密码', min_length=6,
+                               widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '请输入密码'}))
+    password_again = forms.CharField(label='密码', min_length=6, widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'placeholder': '再次输入密码'}))
 
     def __init__(self, *args, **kwargs):
         if 'user' in kwargs:
@@ -79,6 +84,12 @@ class ChangeNickNameForm(forms.Form):
             raise ValidationError('新的昵称不能为空')
         return nickname_new
 
+    def clean_password_again(self):
+        password = self.cleaned_data['password']
+        password_again = self.cleaned_data['password_again']
+        if password != password_again:
+            raise forms.ValidationError("两次输入的密码不一致")
+        return password_again
 
 class BindEmailForm(forms.Form):
     email = forms.EmailField(label='邮箱',
@@ -118,3 +129,8 @@ class BindEmailForm(forms.Form):
         if verification_code == '':
             raise forms.ValidationError('验证码不能为空')
         return verification_code
+
+class EditUserForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['image']

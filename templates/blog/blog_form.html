@@ -2,7 +2,7 @@
 {% load static %}
 {% load bootstrap4 %}
 
-{% block title %}{{ blog_title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
     <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
@@ -10,7 +10,7 @@
 
     <div class="col-sm-9 col-md-9">
         <div class="list-title">
-            <h4>{{ blog_title }}</h4>
+            <h4>{{ title }}</h4>
         </div>
         <article class="flex-left list-group-item post-item px-7">
             <div class="unit unit-1-on-mobile">
@@ -18,7 +18,7 @@
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     <p class="text-right">
-                        <button class="btn btn-primary" type="submit" value="{{ blog_button }}">{{ blog_button }}</button>
+                        <button class="btn btn-primary" type="submit" value="{{ button }}">{{ button }}</button>
                     </p>
                 </form>
             </div>

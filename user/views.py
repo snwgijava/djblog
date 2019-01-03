@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.core.mail import send_mail
+from django.views.generic import UpdateView
 
 from . forms import LoginForm,RegForm,ChangeNickNameForm,BindEmailForm
 from .models import UserProfile
@@ -58,6 +59,7 @@ def register(request):
             #创建用户
             user = User.objects.create_user(username,email,password)
             user.save()
+            UserProfile.objects.create(user=user)
 
             # user = User()
             # user.username = username
@@ -106,6 +108,17 @@ def change_nickname(request):
     context['form'] = form
     context['return_back_url'] = redirect_to
     return render(request,'form.html',context)
+
+class UpdateUserInfoView(UpdateView):
+    model = UserProfile
+    fields = ['nickname','image']
+    template_name = 'blog/blog_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = '修改个人信息'
+        context['button'] = '修改'
+        return context
 
 def bind_email(request):
     redirect_to = request.GET.get('form', reverse('home'))

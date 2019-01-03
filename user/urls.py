@@ -14,4 +14,5 @@ urlpatterns = [
     path('change_nickname/',views.change_nickname,name='change_nickname'),
     path('bind_email/',views.bind_email,name='bind_email'),
     path('send_verifcation_code/',views.send_verifcation_code,name='send_verifcation_code'),
+    path('update_info/<int:pk>',views.UpdateUserInfoView.as_view(),name='update_info'),
 ]
